@@ -1,0 +1,2 @@
+# apischema
+gRPC API Schema
