@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package description;
+option go_package = "./;description";
+
+// CreateI is the input for creating event descriptions. 
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "evnt": "551265",
+//                     "text": "In this Hackathon we are going to build a lot of awesome projects!",
+//                     "user": "551265",
+//                     "vote": "7"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateI {
+  CreateI_Filter filter = 1;
+  repeated CreateI_Object object = 2;
+}
+
+message CreateI_Filter {}
+
+message CreateI_Object {
+  map<string, string> intern = 1;
+  CreateI_Object_Public public = 2;
+}
+
+message CreateI_Object_Public {
+  // evnt is the event ID this description is added to.
+  string evnt = 1;
+  // text is the event description explaining what the scheduled event is about.
+  string text = 2;
+  // user is the user ID creating this event description.
+  string user = 3;
+  // vote is the aggregated quality measurement for this event description based
+  // on user likes and dislikes.
+  string vote = 4;
+}
+
+// CreateO is the output for creating event descriptions.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "description.naonao.online/id": "<id>",
+//                     "description.naonao.online/created": "<unix>"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateO {
+  CreateO_Filter filter = 1;
+  repeated CreateO_Object object = 2;
+}
+
+message CreateO_Filter {}
+
+message CreateO_Object {
+  map<string, string> intern = 1;
+  CreateO_Object_Public public = 2;
+}
+
+message CreateO_Object_Public {}

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package label;
+option go_package = "./;label";
+
+// UpdateI is the input for updating labels. 
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "label.naonao.online/id": "<id>"
+//                 }
+//                 "update": [
+//                     {
+//                         "ope": "replace",
+//                         "pat": "/obj/property/name",
+//                         "val": "crypto"
+//                     }
+//                 ]
+//             }
+//         ]
+//     }
+//
+message UpdateI {
+  UpdateI_Filter filter = 1;
+  repeated UpdateI_Object object = 2;
+}
+
+message UpdateI_Filter {}
+
+message UpdateI_Object {
+  map<string, string> intern = 1;
+  repeated UpdateI_Object_Update update = 2;
+}
+
+message UpdateI_Object_Update {
+  string ope = 1;
+  string pat = 2;
+  optional string val = 3;
+}
+
+// UpdateO is the output for updating labels.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "label.naonao.online/status": "updated"
+//                 }
+//             }
+//         ]
+//     }
+//
+message UpdateO {
+  UpdateO_Filter filter = 1;
+  repeated UpdateO_Object object = 2;
+}
+
+message UpdateO_Filter {}
+
+message UpdateO_Object {
+  map<string, string> intern = 1;
+  UpdateO_Object_Public public = 2;
+}
+
+message UpdateO_Object_Public {}
