@@ -60,6 +60,7 @@ message SearchI_Object_Public {}
 //                 "public": {
 //                     "dura": "3600",
 //                     "host": "551265",
+//                     "labl": "863826",
 //                     "link": "https://google.com",
 //                     "time": "1689001255",
 //                     "user": "551265"
@@ -86,14 +87,16 @@ message SearchO_Object_Public {
   string dura = 1;
   // host is the internal host ID expected to host the scheduled event.
   string host = 2;
+  // labl is the label ID under which the scheduled event is categorized.
+  string labl = 3;
   // link is the online location at which the scheduled event is expected to
   // take place. For IRL events this may just be some informational website.
-  string link = 3;
+  string link = 4;
   // time is the unix timestamp in seconds at which the scheduled event is
   // expected to start.
-  string time = 4;
+  string time = 5;
   // user is the user ID creating this scheduled event. Effectively hosts may be
   // the very users creating their own events within NaoNao. Regardless anyone
   // should be able to create scheduled events for any host.
-  string user = 5;
+  string user = 6;
 }
