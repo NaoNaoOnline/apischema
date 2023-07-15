@@ -36,18 +36,16 @@ jobs:
           echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
 
       - name: "Install gRPC Dependencies"
-        env:
-          GO111MODULE: "on"
         run: |
-          go get -u google.golang.org/protobuf/cmd/protoc-gen-go@v1.31.0
-          go get -u google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.56.2
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.31.0
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.56.2
 
       - name: "Clone Go Code"
         run: git clone https://github.com/NaoNaoOnline/apigocode.git "${{ runner.temp }}/NaoNaoOnline/apigocode/"
 
       - name: "Generate Go Code"
         run: |
-          go get github.com/xh3b4sd/pag@v0.4.0
+          go install github.com/xh3b4sd/pag@v0.4.0
           rm -rf ${{ runner.temp }}/NaoNaoOnline/apigocode/pkg/
           pag generate golang -d ${{ runner.temp }}/NaoNaoOnline/apigocode/pkg/
 
