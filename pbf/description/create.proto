@@ -3,14 +3,14 @@ syntax = "proto3";
 package description;
 option go_package = "./;description";
 
-// CreateI is the input for creating event descriptions. 
+// CreateI is the input for creating event descriptions.
 //
 //     {
 //         "object": [
 //             {
 //                 "public": {
 //                     "evnt": "551265",
-//                     "text": "In this Hackathon we are going to build a lot of awesome projects!",
+//                     "text": "In this Hackathon we build awesome stuff!",
 //                     "user": "551265",
 //                     "vote": "7"
 //                 }

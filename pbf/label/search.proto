@@ -3,7 +3,7 @@ syntax = "proto3";
 package label;
 option go_package = "./;label";
 
-// SearchI is the input for searching labels. 
+// SearchI is the input for searching labels.
 //
 //     {
 //         "filter": [

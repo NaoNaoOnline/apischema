@@ -3,7 +3,7 @@ syntax = "proto3";
 package description;
 option go_package = "./;description";
 
-// UpdateI is the input for updating event descriptions. 
+// UpdateI is the input for updating event descriptions.
 //
 //     {
 //         "object": [

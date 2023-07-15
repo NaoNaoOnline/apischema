@@ -3,7 +3,7 @@ syntax = "proto3";
 package host;
 option go_package = "./;host";
 
-// DeleteI is the input for deleting hosts. 
+// DeleteI is the input for deleting hosts.
 //
 //     {
 //         "object": [

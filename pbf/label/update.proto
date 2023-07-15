@@ -3,7 +3,7 @@ syntax = "proto3";
 package label;
 option go_package = "./;label";
 
-// UpdateI is the input for updating labels. 
+// UpdateI is the input for updating labels.
 //
 //     {
 //         "object": [

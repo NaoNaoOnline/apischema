@@ -3,7 +3,7 @@ syntax = "proto3";
 package event;
 option go_package = "./;event";
 
-// CreateI is the input for creating events. 
+// CreateI is the input for creating events.
 //
 //     {
 //         "object": [

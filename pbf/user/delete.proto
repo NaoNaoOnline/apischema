@@ -3,7 +3,7 @@ syntax = "proto3";
 package user;
 option go_package = "./;user";
 
-// DeleteI is the input for deleting users. 
+// DeleteI is the input for deleting users.
 //
 //     {
 //         "object": [

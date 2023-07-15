@@ -3,7 +3,7 @@ syntax = "proto3";
 package description;
 option go_package = "./;description";
 
-// DeleteI is the input for deleting event descriptions. 
+// DeleteI is the input for deleting event descriptions.
 //
 //     {
 //         "object": [

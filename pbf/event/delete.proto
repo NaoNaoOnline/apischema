@@ -3,7 +3,7 @@ syntax = "proto3";
 package event;
 option go_package = "./;event";
 
-// DeleteI is the input for deleting events. 
+// DeleteI is the input for deleting events.
 //
 //     {
 //         "object": [

@@ -3,7 +3,7 @@ syntax = "proto3";
 package event;
 option go_package = "./;event";
 
-// SearchI is the input for searching events. 
+// SearchI is the input for searching events.
 //
 //     {
 //         "filter": [

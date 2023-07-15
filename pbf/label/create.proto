@@ -3,7 +3,7 @@ syntax = "proto3";
 package label;
 option go_package = "./;label";
 
-// CreateI is the input for creating labels. 
+// CreateI is the input for creating labels.
 //
 //     {
 //         "object": [

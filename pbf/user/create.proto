@@ -3,7 +3,7 @@ syntax = "proto3";
 package user;
 option go_package = "./;user";
 
-// CreateI is the input for creating users. 
+// CreateI is the input for creating users.
 //
 //     {
 //         "object": [

@@ -3,7 +3,7 @@ syntax = "proto3";
 package event;
 option go_package = "./;event";
 
-// UpdateI is the input for updating events. 
+// UpdateI is the input for updating events.
 //
 //     {
 //         "object": [

@@ -3,7 +3,7 @@ syntax = "proto3";
 package user;
 option go_package = "./;user";
 
-// UpdateI is the input for updating users. 
+// UpdateI is the input for updating users.
 //
 //     {
 //         "object": [

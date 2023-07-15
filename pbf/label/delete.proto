@@ -3,7 +3,7 @@ syntax = "proto3";
 package label;
 option go_package = "./;label";
 
-// DeleteI is the input for deleting labels. 
+// DeleteI is the input for deleting labels.
 //
 //     {
 //         "object": [

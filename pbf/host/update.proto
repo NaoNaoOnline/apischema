@@ -3,7 +3,7 @@ syntax = "proto3";
 package host;
 option go_package = "./;host";
 
-// UpdateI is the input for updating hosts. 
+// UpdateI is the input for updating hosts.
 //
 //     {
 //         "object": [

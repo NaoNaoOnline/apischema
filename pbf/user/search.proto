@@ -3,7 +3,7 @@ syntax = "proto3";
 package user;
 option go_package = "./;user";
 
-// SearchI is the input for searching users. 
+// SearchI is the input for searching users.
 //
 //     {
 //         "filter": [
