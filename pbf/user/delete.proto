@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package user;
+option go_package = "./;user";
+
+// DeleteI is the input for deleting users.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "user.naonao.online/id": "<id>"
+//                 }
+//             }
+//         ]
+//     }
+//
+message DeleteI {
+  DeleteI_Filter filter = 1;
+  repeated DeleteI_Object object = 2;
+}
+
+message DeleteI_Filter {}
+
+message DeleteI_Object {
+  map<string, string> intern = 1;
+  DeleteI_Object_Public public = 2;
+}
+
+message DeleteI_Object_Public {}
+
+// DeleteO is the output for deleting users.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "user.naonao.online/status": "deleted"
+//                 }
+//             }
+//         ]
+//     }
+//
+message DeleteO {
+  DeleteO_Filter filter = 1;
+  repeated DeleteO_Object object = 2;
+}
+
+message DeleteO_Filter {}
+
+message DeleteO_Object {
+  map<string, string> intern = 1;
+  DeleteO_Object_Public public = 2;
+}
+
+message DeleteO_Object_Public {}

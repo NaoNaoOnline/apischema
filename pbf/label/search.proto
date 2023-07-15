@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package label;
+option go_package = "./;label";
+
+// SearchI is the input for searching labels.
+//
+//     {
+//         "filter": [
+//             "chunking": {
+//                 "perpage": "50",
+//                 "pointer": "100"
+//             }
+//         ],
+//         "object": [
+//             {
+//                 "intern": {
+//                     "label.naonao.online/id": "<id>"
+//                 }
+//             }
+//         ]
+//     }
+//
+message SearchI {
+  SearchI_Filter filter = 1;
+  repeated SearchI_Object object = 2;
+}
+
+message SearchI_Filter {
+  SearchI_Filter_Chunking chunking = 1;
+}
+
+message SearchI_Filter_Chunking {
+  string perpage = 1;
+  string pointer = 2;
+}
+
+message SearchI_Object {
+  map<string, string> intern = 1;
+  SearchI_Object_Public public = 2;
+}
+
+message SearchI_Object_Public {}
+
+// SearchO is the output for searching labels.
+//
+//     {
+//         "filter": [
+//             "chunking": {
+//                 "perpage": "50",
+//                 "pointer": "150"
+//             }
+//         ],
+//         "object": [
+//             {
+//                 "intern": {
+//                     "label.naonao.online/id": "<id>",
+//                     "label.naonao.online/created": "<unix>"
+//                 },
+//                 "public": {
+//                     "name": "Crypto",
+//                     "user": "551265"
+//                 }
+//             },
+//             ...
+//         ]
+//     }
+//
+message SearchO {
+  SearchO_Filter filter = 1;
+  repeated SearchO_Object object = 2;
+}
+
+message SearchO_Filter {}
+
+message SearchO_Object {
+  map<string, string> intern = 1;
+  SearchO_Object_Public public = 2;
+}
+
+message SearchO_Object_Public {
+  // name is the label name.
+  string name = 1;
+  // user is the user ID creating this label.
+  string user = 2;
+}

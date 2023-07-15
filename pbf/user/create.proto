@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package user;
+option go_package = "./;user";
+
+// CreateI is the input for creating users.
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "name": "xh3b4sd"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateI {
+  CreateI_Filter filter = 1;
+  repeated CreateI_Object object = 2;
+}
+
+message CreateI_Filter {}
+
+message CreateI_Object {
+  map<string, string> intern = 1;
+  CreateI_Object_Public public = 2;
+}
+
+message CreateI_Object_Public {
+  // name is the user name.
+  string name = 1;
+}
+
+// CreateO is the output for creating users.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "user.naonao.online/id": "<id>",
+//                     "user.naonao.online/created": "<unix>"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateO {
+  CreateO_Filter filter = 1;
+  repeated CreateO_Object object = 2;
+}
+
+message CreateO_Filter {}
+
+message CreateO_Object {
+  map<string, string> intern = 1;
+  CreateO_Object_Public public = 2;
+}
+
+message CreateO_Object_Public {}
