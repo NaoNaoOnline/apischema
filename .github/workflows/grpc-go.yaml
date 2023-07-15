@@ -12,8 +12,8 @@ on:
     branches:
       - "main"
       - "master"
-    paths:
-      - "**.proto"
+    # paths:
+    #   - "**.proto"
 
 jobs:
   grpc-go:
@@ -41,16 +41,16 @@ jobs:
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.3.0
 
       - name: "Clone Go Code"
-        run: git clone https://github.com/NaoNaoOnline/apigocode.git "${{ runner.temp }}/NaoNaoOnline/apigocode/"
+        run: git clone https://github.com/NaoNaoOnline/apigocode.git "${{ github.sha }}/NaoNaoOnline/apigocode/"
 
       - name: "Generate Go Code"
         run: |
           go install github.com/xh3b4sd/pag@v0.4.0
-          rm -rf ${{ runner.temp }}/NaoNaoOnline/apigocode/pkg/
-          pag generate golang -d ${{ runner.temp }}/NaoNaoOnline/apigocode/pkg/
+          rm -rf ${{ github.sha }}/NaoNaoOnline/apigocode/pkg/
+          pag generate golang -d ${{ github.sha }}/NaoNaoOnline/apigocode/pkg/
 
       - name: "Go Mod Tidy"
-        working-directory: "${{ runner.temp }}/NaoNaoOnline/apigocode/"
+        working-directory: "${{ github.sha }}/NaoNaoOnline/apigocode/"
         run: |
           if [[ -e go.sum ]]; then
             rm -f go.sum
@@ -62,15 +62,8 @@ jobs:
         env:
           SSH_DEPLOY_KEY: "${{ secrets.SSH_DEPLOY_KEY_APIGOCODE }}"
         with:
-          source-directory: "${{ runner.temp }}/NaoNaoOnline/apigocode/"
+          source-directory: "${{ github.sha }}/NaoNaoOnline/apigocode/"
           destination-github-username: "NaoNaoOnline"
           destination-repository-name: "apigocode"
           commit-message: "update generated code"
           target-branch: main
-
-      - name: "Cleanup Build Container"
-        env:
-          SSH_AUTH_SOCK: "/tmp/ssh_agent.sock"
-        run: |
-          ssh-add -D
-          rm -Rf *
