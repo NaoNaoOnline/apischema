@@ -9,7 +9,9 @@ option go_package = "./;host";
 //         "object": [
 //             {
 //                 "public": {
+//                     "disc": "https://discord.gg/Flashbots",
 //                     "name": "Flashbots",
+//                     "twit": "https://twitter.com/Flashbots",
 //                     "user": "551265"
 //                 }
 //             }
@@ -29,10 +31,14 @@ message CreateI_Object {
 }
 
 message CreateI_Object_Public {
+  // disc is the host's Discord link.
+  string disc = 1;
   // name is the host name.
-  string name = 1;
+  string name = 2;
+  // twit is the host's Twitter link.
+  string twit = 3;
   // user is the user ID creating this host.
-  string user = 2;
+  string user = 4;
 }
 
 // CreateO is the output for creating hosts.
