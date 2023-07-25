@@ -39,7 +39,7 @@ jobs:
         run: |
           curl -LOs https://github.com/protocolbuffers/protobuf/releases/download/v23.4/protoc-23.4-linux-x86_64.zip
           unzip protoc-23.4-linux-x86_64.zip
-          echo "${{ runner.temp }}/bin/" >> $GITHUB_PATH
+          echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
 
       - name: "Install gRPC Dependencies"
         working-directory: "${{ runner.temp }}"
@@ -47,11 +47,15 @@ jobs:
           curl -LOs https://github.com/grpc/grpc-web/releases/download/1.4.2/protoc-gen-grpc-web-1.4.2-linux-x86_64
           chmod +x protoc-gen-grpc-web-1.4.2-linux-x86_64
           mv protoc-gen-grpc-web-1.4.2-linux-x86_64 ${{ runner.temp }}/bin/protoc-gen-grpc-web
-          echo "${{ runner.temp }}/bin/" >> $GITHUB_PATH
+          echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
 
       - name: "Install Typescript Dependencies"
+        working-directory: "${{ runner.temp }}"
         run: |
           npm install prettier --global
+          curl -LOs https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-linux-x86_64.zip
+          unzip protobuf-javascript-3.21.2-linux-x86_64.zip
+          echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
 
       - name: "Clone Typescript Code"
         run: |
