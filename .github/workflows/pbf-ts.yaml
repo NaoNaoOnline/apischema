@@ -39,7 +39,7 @@ jobs:
       - name: "Install Typescript Dependencies"
         run: |
           npm install prettier --global
-					npm install @protobuf-ts/plugin --global
+          npm install @protobuf-ts/plugin --global
 
       - name: "Clone Typescript Code"
         run: |
