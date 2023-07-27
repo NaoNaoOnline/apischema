@@ -2,10 +2,10 @@
 # Do not edit. This file was generated via the "workflow" command line tool.
 # More information about the tool can be found at github.com/xh3b4sd/workflow.
 #
-#     workflow create grpcgo -o NaoNaoOnline -r apigocode -s
+#     workflow create pbfgo -o NaoNaoOnline -r apigocode
 #
 
-name: "grpc-go"
+name: "pbf-go"
 
 on:
   push:
@@ -17,7 +17,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  grpc-go:
+  pbf-go:
     runs-on: "ubuntu-latest"
     steps:
 
@@ -36,7 +36,7 @@ jobs:
           unzip protoc-23.4-linux-x86_64.zip
           echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
 
-      - name: "Install gRPC Dependencies"
+      - name: "Install Go Dependencies"
         run: |
           go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.31.0
           go install github.com/twitchtv/twirp/protoc-gen-twirp@v8.1.3
@@ -49,6 +49,8 @@ jobs:
         run: |
           inp="./pbf"
           out=${{ github.sha }}/NaoNaoOnline/apigocode/pkg
+
+          rm -rf $out
 
           for x in $(ls $inp); do
             if [ -n "$(ls $inp/$x)" ]; then
