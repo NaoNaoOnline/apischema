@@ -2,10 +2,10 @@
 # Do not edit. This file was generated via the "workflow" command line tool.
 # More information about the tool can be found at github.com/xh3b4sd/workflow.
 #
-#     workflow create grpcts -o NaoNaoOnline -r apitscode -s
+#     workflow create pbfts -o NaoNaoOnline -r apitscode
 #
 
-name: "grpc-ts"
+name: "pbf-ts"
 
 on:
   push:
@@ -17,17 +17,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  grpc-ts:
+  pbf-ts:
     runs-on: "ubuntu-latest"
     steps:
 
       - name: "Setup Git Project"
         uses: "actions/checkout@v3"
-
-      - name: "Setup Go Env"
-        uses: "actions/setup-go@v4"
-        with:
-          go-version: "1.20.1"
 
       - name: "Setup Typescript Env"
         uses: "actions/setup-node@v2"
@@ -41,21 +36,10 @@ jobs:
           unzip protoc-23.4-linux-x86_64.zip
           echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
 
-      - name: "Install gRPC Dependencies"
-        working-directory: "${{ runner.temp }}"
-        run: |
-          curl -LOs https://github.com/grpc/grpc-web/releases/download/1.4.2/protoc-gen-grpc-web-1.4.2-linux-x86_64
-          chmod +x protoc-gen-grpc-web-1.4.2-linux-x86_64
-          mv protoc-gen-grpc-web-1.4.2-linux-x86_64 ${{ runner.temp }}/bin/protoc-gen-grpc-web
-          echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
-
       - name: "Install Typescript Dependencies"
-        working-directory: "${{ runner.temp }}"
         run: |
           npm install prettier --global
-          curl -LOs https://github.com/protocolbuffers/protobuf-javascript/releases/download/v3.21.2/protobuf-javascript-3.21.2-linux-x86_64.zip
-          unzip protobuf-javascript-3.21.2-linux-x86_64.zip
-          echo "${{ runner.temp }}/bin" >> $GITHUB_PATH
+					npm install @protobuf-ts/plugin --global
 
       - name: "Clone Typescript Code"
         run: |
@@ -63,9 +47,23 @@ jobs:
 
       - name: "Generate Typescript Code"
         run: |
-          go install github.com/xh3b4sd/pag@v0.4.0
-          rm -rf ${{ github.sha }}/NaoNaoOnline/apitscode/src/
-          pag generate typescript -d ${{ github.sha }}/NaoNaoOnline/apitscode/src/
+          inp="./pbf"
+          out=${{ github.sha }}/NaoNaoOnline/apitscode/src
+
+          rm -rf $out
+
+          for x in $(ls $inp); do
+            if [ -n "$(ls $inp/$x)" ]; then
+              mkdir -p $out/$x
+
+              lin=()
+              for y in $(ls -F $inp/$x); do
+                lin+=($inp/$x/$y)
+              done
+
+              npx protoc --ts_out=$out/$x ${lin[@]}
+            fi
+          done
 
       - name: "Format Typescript Code"
         run: |
