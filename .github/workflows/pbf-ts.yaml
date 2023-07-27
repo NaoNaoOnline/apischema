@@ -49,21 +49,27 @@ jobs:
         run: |
           inp="./pbf"
           out=${{ github.sha }}/NaoNaoOnline/apitscode/src
+          tmp="./tmp"
 
           rm -rf $out
 
           for x in $(ls $inp); do
             if [ -n "$(ls $inp/$x)" ]; then
               mkdir -p $out/$x
+              mkdir -p $tmp/$x
 
               lin=()
               for y in $(ls -F $inp/$x); do
                 lin+=($inp/$x/$y)
               done
 
-              npx protoc --ts_out=$out/$x ${lin[@]}
+              npx protoc --proto_path=. --ts_out=$tmp/$x --ts_opt=output_javascript ${lin[@]}
+              mv $tmp/$x/$inp/$x/* $out/$x
+              rm -rf $tmp/$x
             fi
           done
+
+          rm -rf $tmp
 
       - name: "Format Typescript Code"
         run: |
