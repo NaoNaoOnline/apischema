@@ -16,20 +16,22 @@ option go_package = "./;user";
 //     }
 //
 message CreateI {
-  CreateI_Filter filter = 1;
-  repeated CreateI_Object object = 2;
+  CreateI_Filter filter = 100;
+  repeated CreateI_Object object = 200;
 }
 
 message CreateI_Filter {}
 
 message CreateI_Object {
-  map<string, string> intern = 1;
-  CreateI_Object_Public public = 2;
+  CreateI_Object_Intern intern = 100;
+  CreateI_Object_Public public = 200;
 }
+
+message CreateI_Object_Intern {}
 
 message CreateI_Object_Public {
   // name is the user name.
-  string name = 1;
+  string name = 100;
 }
 
 // CreateO is the output for creating users.
@@ -38,23 +40,30 @@ message CreateI_Object_Public {
 //         "object": [
 //             {
 //                 "intern": {
-//                     "user.naonao.online/id": "<id>",
-//                     "user.naonao.online/created": "<unix>"
+//                     "crtd": "1689001255",
+//                     "user": "551265"
 //                 }
 //             }
 //         ]
 //     }
 //
 message CreateO {
-  CreateO_Filter filter = 1;
-  repeated CreateO_Object object = 2;
+  CreateO_Filter filter = 100;
+  repeated CreateO_Object object = 200;
 }
 
 message CreateO_Filter {}
 
 message CreateO_Object {
-  map<string, string> intern = 1;
-  CreateO_Object_Public public = 2;
+  CreateO_Object_Intern intern = 100;
+  CreateO_Object_Public public = 200;
+}
+
+message CreateO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the user got created.
+  string crtd = 100;
+  // user is the ID of the user being created.
+  string user = 200;
 }
 
 message CreateO_Object_Public {}

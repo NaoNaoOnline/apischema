@@ -9,22 +9,27 @@ option go_package = "./;description";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "description.naonao.online/id": "<id>"
+//                     "desc": "98972893"
 //                 }
 //             }
 //         ]
 //     }
 //
 message DeleteI {
-  DeleteI_Filter filter = 1;
-  repeated DeleteI_Object object = 2;
+  DeleteI_Filter filter = 100;
+  repeated DeleteI_Object object = 200;
 }
 
 message DeleteI_Filter {}
 
 message DeleteI_Object {
-  map<string, string> intern = 1;
-  DeleteI_Object_Public public = 2;
+  DeleteI_Object_Intern intern = 100;
+  DeleteI_Object_Public public = 200;
+}
+
+message DeleteI_Object_Intern {
+  // desc is the ID of the description being deleted.
+  string desc = 100;
 }
 
 message DeleteI_Object_Public {}
@@ -35,22 +40,27 @@ message DeleteI_Object_Public {}
 //         "object": [
 //             {
 //                 "intern": {
-//                     "description.naonao.online/status": "deleted"
+//                     "stts": "deleted"
 //                 }
 //             }
 //         ]
 //     }
 //
 message DeleteO {
-  DeleteO_Filter filter = 1;
-  repeated DeleteO_Object object = 2;
+  DeleteO_Filter filter = 100;
+  repeated DeleteO_Object object = 200;
 }
 
 message DeleteO_Filter {}
 
 message DeleteO_Object {
-  map<string, string> intern = 1;
-  DeleteO_Object_Public public = 2;
+  DeleteO_Object_Intern intern = 100;
+  DeleteO_Object_Public public = 200;
+}
+
+message DeleteO_Object_Intern {
+  // stts is the resource status upon successful description deletion.
+  string stts = 100;
 }
 
 message DeleteO_Object_Public {}

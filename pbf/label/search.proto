@@ -15,29 +15,32 @@ option go_package = "./;label";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "label.naonao.online/id": "<id>"
+//                     "kind": "host"
 //                 }
 //             }
 //         ]
 //     }
 //
 message SearchI {
-  SearchI_Filter filter = 1;
-  repeated SearchI_Object object = 2;
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
 }
 
-message SearchI_Filter {
-  SearchI_Filter_Chunking chunking = 1;
-}
+message SearchI_Filter { SearchI_Filter_Chunking chunking = 100; }
 
 message SearchI_Filter_Chunking {
-  string perpage = 1;
-  string pointer = 2;
+  string perpage = 100;
+  string pointer = 200;
 }
 
 message SearchI_Object {
-  map<string, string> intern = 1;
-  SearchI_Object_Public public = 2;
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {
+  // kind is the label type for which events are being searched.
+  string kind = 100;
 }
 
 message SearchI_Object_Public {}
@@ -54,11 +57,15 @@ message SearchI_Object_Public {}
 //         "object": [
 //             {
 //                 "intern": {
-//                     "label.naonao.online/id": "<id>",
-//                     "label.naonao.online/created": "<unix>"
+//                     "crtd": "1689001255",
+//                     "labl": "863826"
 //                 },
 //                 "public": {
-//                     "name": "Crypto",
+//                     "desc": "Flashbots researches implications of MEV",
+//                     "disc": "https://discord.gg/Flashbots",
+//                     "kind": "host",
+//                     "name": "Flashbots",
+//                     "twit": "https://twitter.com/Flashbots",
 //                     "user": "551265"
 //                 }
 //             },
@@ -67,20 +74,36 @@ message SearchI_Object_Public {}
 //     }
 //
 message SearchO {
-  SearchO_Filter filter = 1;
-  repeated SearchO_Object object = 2;
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
 }
 
 message SearchO_Filter {}
 
 message SearchO_Object {
-  map<string, string> intern = 1;
-  SearchO_Object_Public public = 2;
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the label got created.
+  string crtd = 100;
+  // labl is the ID of the label being searched.
+  string labl = 200;
 }
 
 message SearchO_Object_Public {
+  // desc is the label's description.
+  string desc = 100;
+  // disc is the label's Discord link.
+  string disc = 200;
+  // kind is the label type, e.g. host for host labels and cate for category
+  // labels.
+  string kind = 300;
   // name is the label name.
-  string name = 1;
+  string name = 400;
+  // twit is the label's Twitter link.
+  string twit = 500;
   // user is the user ID creating this label.
-  string user = 2;
+  string user = 600;
 }

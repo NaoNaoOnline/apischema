@@ -9,22 +9,27 @@ option go_package = "./;user";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "user.naonao.online/id": "<id>"
+//                     "user": "551265"
 //                 }
 //             }
 //         ]
 //     }
 //
 message DeleteI {
-  DeleteI_Filter filter = 1;
-  repeated DeleteI_Object object = 2;
+  DeleteI_Filter filter = 100;
+  repeated DeleteI_Object object = 200;
 }
 
 message DeleteI_Filter {}
 
 message DeleteI_Object {
-  map<string, string> intern = 1;
-  DeleteI_Object_Public public = 2;
+  DeleteI_Object_Intern intern = 100;
+  DeleteI_Object_Public public = 200;
+}
+
+message DeleteI_Object_Intern {
+  // user is the ID of the user being deleted.
+  string user = 100;
 }
 
 message DeleteI_Object_Public {}
@@ -35,22 +40,27 @@ message DeleteI_Object_Public {}
 //         "object": [
 //             {
 //                 "intern": {
-//                     "user.naonao.online/status": "deleted"
+//                     "stts": "deleted"
 //                 }
 //             }
 //         ]
 //     }
 //
 message DeleteO {
-  DeleteO_Filter filter = 1;
-  repeated DeleteO_Object object = 2;
+  DeleteO_Filter filter = 100;
+  repeated DeleteO_Object object = 200;
 }
 
 message DeleteO_Filter {}
 
 message DeleteO_Object {
-  map<string, string> intern = 1;
-  DeleteO_Object_Public public = 2;
+  DeleteO_Object_Intern intern = 100;
+  DeleteO_Object_Public public = 200;
+}
+
+message DeleteO_Object_Intern {
+  // stts is the resource status upon successful user deletion.
+  string stts = 100;
 }
 
 message DeleteO_Object_Public {}

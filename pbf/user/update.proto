@@ -9,9 +9,9 @@ option go_package = "./;user";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "user.naonao.online/id": "<id>"
+//                     "user": "551265"
 //                 }
-//                 "update": [
+//                 "public": [
 //                     {
 //                         "ope": "replace",
 //                         "pat": "/obj/property/name",
@@ -23,21 +23,26 @@ option go_package = "./;user";
 //     }
 //
 message UpdateI {
-  UpdateI_Filter filter = 1;
-  repeated UpdateI_Object object = 2;
+  UpdateI_Filter filter = 100;
+  repeated UpdateI_Object object = 200;
 }
 
 message UpdateI_Filter {}
 
 message UpdateI_Object {
-  map<string, string> intern = 1;
-  repeated UpdateI_Object_Update update = 2;
+  UpdateI_Object_Intern intern = 100;
+  repeated UpdateI_Object_Public public = 200;
 }
 
-message UpdateI_Object_Update {
-  string ope = 1;
-  string pat = 2;
-  optional string val = 3;
+message UpdateI_Object_Intern {
+  // user is the ID of the user being updated.
+  string user = 100;
+}
+
+message UpdateI_Object_Public {
+  string ope = 100;
+  string pat = 200;
+  optional string val = 300;
 }
 
 // UpdateO is the output for updating users.
@@ -46,22 +51,27 @@ message UpdateI_Object_Update {
 //         "object": [
 //             {
 //                 "intern": {
-//                     "user.naonao.online/status": "updated"
+//                     "stts": "updated"
 //                 }
 //             }
 //         ]
 //     }
 //
 message UpdateO {
-  UpdateO_Filter filter = 1;
-  repeated UpdateO_Object object = 2;
+  UpdateO_Filter filter = 100;
+  repeated UpdateO_Object object = 200;
 }
 
 message UpdateO_Filter {}
 
 message UpdateO_Object {
-  map<string, string> intern = 1;
-  UpdateO_Object_Public public = 2;
+  UpdateO_Object_Intern intern = 100;
+  UpdateO_Object_Public public = 200;
+}
+
+message UpdateO_Object_Intern {
+  // stts is the resource status upon successful user modification.
+  string stts = 100;
 }
 
 message UpdateO_Object_Public {}
