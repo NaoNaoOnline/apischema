@@ -15,29 +15,32 @@ option go_package = "./;event";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "event.naonao.online/labels": "<id>,<id>,<id>"
+//                     "labl": "863826"
 //                 }
 //             }
 //         ]
 //     }
 //
 message SearchI {
-  SearchI_Filter filter = 1;
-  repeated SearchI_Object object = 2;
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
 }
 
-message SearchI_Filter {
-  SearchI_Filter_Chunking chunking = 1;
-}
+message SearchI_Filter { SearchI_Filter_Chunking chunking = 100; }
 
 message SearchI_Filter_Chunking {
-  string perpage = 1;
-  string pointer = 2;
+  string perpage = 100;
+  string pointer = 200;
 }
 
 message SearchI_Object {
-  map<string, string> intern = 1;
-  SearchI_Object_Public public = 2;
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {
+  // labl is the label ID for which events are being searched.
+  string labl = 100;
 }
 
 message SearchI_Object_Public {}
@@ -54,8 +57,8 @@ message SearchI_Object_Public {}
 //         "object": [
 //             {
 //                 "intern": {
-//                     "event.naonao.online/id": "<id>",
-//                     "event.naonao.online/created": "<unix>"
+//                     "crtd": "1689001255",
+//                     "evnt": "551265"
 //                 },
 //                 "public": {
 //                     "dura": "3600",
@@ -71,32 +74,39 @@ message SearchI_Object_Public {}
 //     }
 //
 message SearchO {
-  SearchO_Filter filter = 1;
-  repeated SearchO_Object object = 2;
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
 }
 
 message SearchO_Filter {}
 
 message SearchO_Object {
-  map<string, string> intern = 1;
-  SearchO_Object_Public public = 2;
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the event got created.
+  string crtd = 100;
+  // evnt is the ID of the event being searched.
+  string evnt = 200;
 }
 
 message SearchO_Object_Public {
-  // dura is the estimated duration of the scheduled event.
-  string dura = 1;
-  // host is the internal host ID expected to host the scheduled event.
-  string host = 2;
-  // labl is the label ID under which the scheduled event is categorized.
-  string labl = 3;
-  // link is the online location at which the scheduled event is expected to
-  // take place. For IRL events this may just be some informational website.
-  string link = 4;
-  // time is the unix timestamp in seconds at which the scheduled event is
-  // expected to start.
-  string time = 5;
-  // user is the user ID creating this scheduled event. Effectively hosts may be
-  // the very users creating their own events within NaoNao. Regardless anyone
-  // should be able to create scheduled events for any host.
-  string user = 6;
+  // dura is the estimated duration of the event.
+  string dura = 100;
+  // host is the internal host ID expected to host the event.
+  string host = 200;
+  // labl is the label ID under which the event is categorized.
+  string labl = 300;
+  // link is the online location at which the event is expected to take place.
+  // For IRL events this may just be some informational website.
+  string link = 400;
+  // time is the unix timestamp in seconds at which the event is expected to
+  // start.
+  string time = 500;
+  // user is the user ID creating this event. Effectively hosts may be the very
+  // users creating their own events within NaoNao. Regardless anyone should be
+  // able to create events for any host.
+  string user = 600;
 }

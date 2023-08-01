@@ -15,29 +15,32 @@ option go_package = "./;user";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "user.naonao.online/id": "<id>"
+//                     "user": "551265"
 //                 }
 //             }
 //         ]
 //     }
 //
 message SearchI {
-  SearchI_Filter filter = 1;
-  repeated SearchI_Object object = 2;
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
 }
 
-message SearchI_Filter {
-  SearchI_Filter_Chunking chunking = 1;
-}
+message SearchI_Filter { SearchI_Filter_Chunking chunking = 100; }
 
 message SearchI_Filter_Chunking {
-  string perpage = 1;
-  string pointer = 2;
+  string perpage = 100;
+  string pointer = 200;
 }
 
 message SearchI_Object {
-  map<string, string> intern = 1;
-  SearchI_Object_Public public = 2;
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {
+  // user is the ID of the user being searched.
+  string user = 100;
 }
 
 message SearchI_Object_Public {}
@@ -54,8 +57,8 @@ message SearchI_Object_Public {}
 //         "object": [
 //             {
 //                 "intern": {
-//                     "user.naonao.online/id": "<id>",
-//                     "user.naonao.online/created": "<unix>"
+//                     "crtd": "1689001255",
+//                     "user": "551265"
 //                 },
 //                 "public": {
 //                     "name": "xh3b4sd"
@@ -66,18 +69,25 @@ message SearchI_Object_Public {}
 //     }
 //
 message SearchO {
-  SearchO_Filter filter = 1;
-  repeated SearchO_Object object = 2;
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
 }
 
 message SearchO_Filter {}
 
 message SearchO_Object {
-  map<string, string> intern = 1;
-  SearchO_Object_Public public = 2;
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the event got created.
+  string crtd = 100;
+  // user is the ID of the user being searched.
+  string user = 200;
 }
 
 message SearchO_Object_Public {
   // name is the user name.
-  string name = 1;
+  string name = 100;
 }

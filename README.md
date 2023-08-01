@@ -1,8 +1,9 @@
 # apischema
 
-This is the source of truth for the NaoNao gRPC API. The apischema defines how
-RPC calls are shaped and function. Having a unified abstraction helps us
-generate client and server code across different languages.
+This is the source of truth for the NaoNao RPC API. The apischema defines how
+RPC calls are shaped and function using Protocol Buffer definitions. Having a
+unified abstraction helps us generate client and server code across different
+languages and remain mostly independent of transport layer specifics.
 
 
 

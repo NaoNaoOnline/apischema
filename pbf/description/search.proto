@@ -15,29 +15,32 @@ option go_package = "./;description";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "event.naonao.online/id": "<id>"
+//                     "evnt": "551265"
 //                 }
 //             }
 //         ]
 //     }
 //
 message SearchI {
-  SearchI_Filter filter = 1;
-  repeated SearchI_Object object = 2;
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
 }
 
-message SearchI_Filter {
-  SearchI_Filter_Chunking chunking = 1;
-}
+message SearchI_Filter { SearchI_Filter_Chunking chunking = 100; }
 
 message SearchI_Filter_Chunking {
-  string perpage = 1;
-  string pointer = 2;
+  string perpage = 100;
+  string pointer = 200;
 }
 
 message SearchI_Object {
-  map<string, string> intern = 1;
-  SearchI_Object_Public public = 2;
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {
+  // evnt is the event ID for which descriptions are being searched.
+  string evnt = 100;
 }
 
 message SearchI_Object_Public {}
@@ -54,8 +57,8 @@ message SearchI_Object_Public {}
 //         "object": [
 //             {
 //                 "intern": {
-//                     "description.naonao.online/id": "<id>",
-//                     "description.naonao.online/created": "<unix>"
+//                     "crtd": "1689001255",
+//                     "desc": "98972893"
 //                 },
 //                 "public": {
 //                     "evnt": "551265",
@@ -69,25 +72,32 @@ message SearchI_Object_Public {}
 //     }
 //
 message SearchO {
-  SearchO_Filter filter = 1;
-  repeated SearchO_Object object = 2;
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
 }
 
 message SearchO_Filter {}
 
 message SearchO_Object {
-  map<string, string> intern = 1;
-  SearchO_Object_Public public = 2;
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the description got created.
+  string crtd = 100;
+  // desc is the ID of the description being searched.
+  string desc = 200;
 }
 
 message SearchO_Object_Public {
   // evnt is the event ID this description is added to.
-  string evnt = 1;
-  // text is the event description explaining what the scheduled event is about.
-  string text = 2;
+  string evnt = 100;
+  // text is the event description explaining what the event is about.
+  string text = 200;
   // user is the user ID creating this event description.
-  string user = 3;
+  string user = 300;
   // vote is the aggregated quality measurement for this event description based
   // on user likes and dislikes.
-  string vote = 4;
+  string vote = 400;
 }
