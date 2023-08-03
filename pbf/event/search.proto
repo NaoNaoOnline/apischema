@@ -26,7 +26,9 @@ message SearchI {
   repeated SearchI_Object object = 200;
 }
 
-message SearchI_Filter { SearchI_Filter_Chunking chunking = 100; }
+message SearchI_Filter {
+  SearchI_Filter_Chunking chunking = 100;
+}
 
 message SearchI_Filter_Chunking {
   string perpage = 100;

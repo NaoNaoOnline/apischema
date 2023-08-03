@@ -10,7 +10,7 @@ languages and remain mostly independent of transport layer specifics.
 ### Formatting
 
 ```
-clang-format -i --style=google $(find ./pbf -name "*.proto")
+clang-format -i $(find ./pbf -name "*.proto")
 ```
 
 
