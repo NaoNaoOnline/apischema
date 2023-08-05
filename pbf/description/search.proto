@@ -15,7 +15,7 @@ option go_package = "./;description";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "evnt": "551265"
+//                     "evnt": "778237"
 //                 }
 //             }
 //         ]
@@ -60,12 +60,12 @@ message SearchI_Object_Public {}
 //             {
 //                 "intern": {
 //                     "crtd": "1689001255",
-//                     "desc": "98972893"
+//                     "desc": "98972893",
+//                     "user": "551265"
 //                 },
 //                 "public": {
-//                     "evnt": "551265",
+//                     "evnt": "778237",
 //                     "text": "In this Hackathon we build awesome stuff!",
-//                     "user": "551265",
 //                     "vote": "7"
 //                 }
 //             },
@@ -90,16 +90,16 @@ message SearchO_Object_Intern {
   string crtd = 100;
   // desc is the ID of the description being searched.
   string desc = 200;
+  // user is the ID of the user who created this description.
+  string user = 300;
 }
 
 message SearchO_Object_Public {
-  // evnt is the event ID this description is added to.
+  // evnt is the event ID this description is mapped to.
   string evnt = 100;
-  // text is the event description explaining what the event is about.
+  // text is the description explaining what this event is about.
   string text = 200;
-  // user is the user ID creating this event description.
-  string user = 300;
-  // vote is the aggregated quality measurement for this event description based
-  // on user likes and dislikes.
-  string vote = 400;
+  // vote is the aggregated quality measurement for this description based on
+  // user likes and dislikes.
+  string vote = 300;
 }

@@ -13,8 +13,7 @@ option go_package = "./;label";
 //                     "disc": "https://discord.gg/Flashbots",
 //                     "kind": "host",
 //                     "name": "Flashbots",
-//                     "twit": "https://twitter.com/Flashbots",
-//                     "user": "551265"
+//                     "twit": "https://twitter.com/Flashbots"
 //                 }
 //             }
 //         ]
@@ -46,8 +45,6 @@ message CreateI_Object_Public {
   string name = 400;
   // twit is the label's Twitter link.
   string twit = 500;
-  // user is the user ID creating this label.
-  string user = 600;
 }
 
 // CreateO is the output for creating labels.

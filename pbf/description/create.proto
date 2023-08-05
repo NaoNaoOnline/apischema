@@ -3,15 +3,14 @@ syntax = "proto3";
 package description;
 option go_package = "./;description";
 
-// CreateI is the input for creating event descriptions.
+// CreateI is the input for creating descriptions.
 //
 //     {
 //         "object": [
 //             {
 //                 "public": {
-//                     "evnt": "551265",
+//                     "evnt": "778237",
 //                     "text": "In this Hackathon we build awesome stuff!",
-//                     "user": "551265",
 //                     "vote": "7"
 //                 }
 //             }
@@ -33,18 +32,16 @@ message CreateI_Object {
 message CreateI_Object_Intern {}
 
 message CreateI_Object_Public {
-  // evnt is the event ID this description is added to.
+  // evnt is the event ID this description is mapped to.
   string evnt = 100;
-  // text is the event description explaining what the event is about.
+  // text is the description explaining what this event is about.
   string text = 200;
-  // user is the user ID creating this event description.
-  string user = 300;
-  // vote is the aggregated quality measurement for this event description based
-  // on user likes and dislikes.
-  string vote = 400;
+  // vote is the aggregated quality measurement for this description based on
+  // user likes and dislikes.
+  string vote = 300;
 }
 
-// CreateO is the output for creating event descriptions.
+// CreateO is the output for creating descriptions.
 //
 //     {
 //         "object": [

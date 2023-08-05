@@ -15,7 +15,7 @@ option go_package = "./;event";
 //         "object": [
 //             {
 //                 "intern": {
-//                     "labl": "863826"
+//                     "cate": "863826"
 //                 }
 //             }
 //         ]
@@ -41,8 +41,10 @@ message SearchI_Object {
 }
 
 message SearchI_Object_Intern {
-  // labl is the label ID for which events are being searched.
-  string labl = 100;
+  // cate is the ID of the category label for which events are being searched.
+  string cate = 100;
+  // host is the ID of the host label for which events are being searched.
+  string host = 200;
 }
 
 message SearchI_Object_Public {}
@@ -60,15 +62,15 @@ message SearchI_Object_Public {}
 //             {
 //                 "intern": {
 //                     "crtd": "1689001255",
-//                     "evnt": "551265"
+//                     "evnt": "778237",
+//                     "user": "551265"
 //                 },
 //                 "public": {
+//                     "cate": "863826",
 //                     "dura": "3600",
 //                     "host": "551265",
-//                     "labl": "863826",
 //                     "link": "https://google.com",
-//                     "time": "1689001255",
-//                     "user": "551265"
+//                     "time": "1689001255"
 //                 }
 //             },
 //             ...
@@ -92,23 +94,22 @@ message SearchO_Object_Intern {
   string crtd = 100;
   // evnt is the ID of the event being searched.
   string evnt = 200;
+  // user is the ID of the user who created this event.
+  string user = 300;
 }
 
 message SearchO_Object_Public {
-  // dura is the estimated duration of the event.
-  string dura = 100;
+  // cate is the comma separated list of label IDs under which the event is
+  // categorized.
+  string cate = 100;
+  // dura is the estimated duration of the event in seconds.
+  string dura = 200;
   // host is the internal host ID expected to host the event.
-  string host = 200;
-  // labl is the label ID under which the event is categorized.
-  string labl = 300;
+  string host = 300;
   // link is the online location at which the event is expected to take place.
   // For IRL events this may just be some informational website.
   string link = 400;
   // time is the unix timestamp in seconds at which the event is expected to
   // start.
   string time = 500;
-  // user is the user ID creating this event. Effectively hosts may be the very
-  // users creating their own events within NaoNao. Regardless anyone should be
-  // able to create events for any host.
-  string user = 600;
 }
