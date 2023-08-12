@@ -10,8 +10,7 @@ option go_package = "./;description";
 //             {
 //                 "public": {
 //                     "evnt": "778237",
-//                     "text": "In this Hackathon we build awesome stuff!",
-//                     "vote": "7"
+//                     "text": "In this Hackathon we build awesome stuff!"
 //                 }
 //             }
 //         ]
@@ -36,9 +35,6 @@ message CreateI_Object_Public {
   string evnt = 100;
   // text is the description explaining what this event is about.
   string text = 200;
-  // vote is the aggregated quality measurement for this description based on
-  // user likes and dislikes.
-  string vote = 300;
 }
 
 // CreateO is the output for creating descriptions.
