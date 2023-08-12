@@ -43,8 +43,10 @@ message SearchI_Object {
 message SearchI_Object_Intern {
   // cate is the ID of the category label for which events are being searched.
   string cate = 100;
+  // evnt is the ID of the event being searched.
+  string evnt = 200;
   // host is the ID of the host label for which events are being searched.
-  string host = 200;
+  string host = 300;
 }
 
 message SearchI_Object_Public {}

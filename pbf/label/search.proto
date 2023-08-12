@@ -44,6 +44,8 @@ message SearchI_Object_Intern {
   // kind is the label type for which events are being searched, e.g. host for
   // host labels and cate for category labels.
   string kind = 100;
+  // labl is the ID of the label being searched.
+  string labl = 200;
 }
 
 message SearchI_Object_Public {}
