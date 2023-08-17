@@ -13,9 +13,9 @@ option go_package = "./;description";
 //                 }
 //                 "update": [
 //                     {
-//                         "ope": "add",
-//                         "pat": "/obj/property/vote",
-//                         "val": "1"
+//                         "ope": "replace",
+//                         "pat": "/rtng/98972893/amnt",
+//                         "val": "8"
 //                     }
 //                 ]
 //             }

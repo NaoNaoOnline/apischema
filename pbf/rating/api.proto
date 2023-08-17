@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rating;
+option go_package = "./;rating";
+
+import "pbf/rating/create.proto";
+import "pbf/rating/delete.proto";
+import "pbf/rating/search.proto";
+import "pbf/rating/update.proto";
+
+service API {
+  rpc Create(CreateI) returns (CreateO) {}
+  rpc Delete(DeleteI) returns (DeleteO) {}
+  rpc Search(SearchI) returns (SearchO) {}
+  rpc Update(UpdateI) returns (UpdateO) {}
+}
