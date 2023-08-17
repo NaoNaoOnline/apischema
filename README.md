@@ -23,7 +23,8 @@ order to add or remove a single item of that resource's list property. For such
 operations the resource's service in question provides the option of JSON-Patch
 operations.
 
-- https://tools.ietf.org/html/rfc6902
+- https://datatracker.ietf.org/doc/html/rfc6902
+- https://jsonpatch.com
 - https://github.com/evanphx/json-patch
 - https://github.com/Starcounter-Jack/JSON-Patch
 
