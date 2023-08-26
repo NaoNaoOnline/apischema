@@ -111,7 +111,7 @@ message SearchO_Object_Public {
   string text = 300;
 }
 
-message SearchO_Object_Public_rctn {
+message SearchO_Object_Public_Rctn {
   // amnt is the number of times the accociated reaction got used.
   int32 amnt = 100;
 }
