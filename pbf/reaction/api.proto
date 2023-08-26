@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package rating;
-option go_package = "./;rating";
+package reaction;
+option go_package = "./;reaction";
 
-import "pbf/rating/create.proto";
-import "pbf/rating/delete.proto";
-import "pbf/rating/search.proto";
-import "pbf/rating/update.proto";
+import "pbf/reaction/create.proto";
+import "pbf/reaction/delete.proto";
+import "pbf/reaction/search.proto";
+import "pbf/reaction/update.proto";
 
 service API {
   rpc Create(CreateI) returns (CreateO) {}

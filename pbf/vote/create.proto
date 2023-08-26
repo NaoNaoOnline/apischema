@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package vote;
+option go_package = "./;vote";
+
+// CreateI is the input for creating votes.
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "desc": "98972893",
+//                     "rctn": "113714405"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateI {
+  CreateI_Filter filter = 100;
+  repeated CreateI_Object object = 200;
+}
+
+message CreateI_Filter {}
+
+message CreateI_Object {
+  CreateI_Object_Intern intern = 100;
+  CreateI_Object_Public public = 200;
+}
+
+message CreateI_Object_Intern {}
+
+message CreateI_Object_Public {
+  // desc is the ID of the description the user voted on.
+  string desc = 100;
+  // rctn is the ID of the reaction the user used to vote.
+  string rctn = 200;
+}
+
+// CreateO is the output for creating votes.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "vote": "70032732"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateO {
+  CreateO_Filter filter = 100;
+  repeated CreateO_Object object = 200;
+}
+
+message CreateO_Filter {}
+
+message CreateO_Object {
+  CreateO_Object_Intern intern = 100;
+  CreateO_Object_Public public = 200;
+}
+
+message CreateO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the vote got created.
+  string crtd = 100;
+  // vote is the ID of the vote being created.
+  string vote = 200;
+}
+
+message CreateO_Object_Public {}

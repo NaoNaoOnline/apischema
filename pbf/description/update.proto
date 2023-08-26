@@ -14,8 +14,8 @@ option go_package = "./;description";
 //                 "update": [
 //                     {
 //                         "ope": "replace",
-//                         "pat": "/rtng/98972893/amnt",
-//                         "val": "8"
+//                         "pat": "/text",
+//                         "val": "In this Hackathon we build a rocket ship!"
 //                     }
 //                 ]
 //             }
