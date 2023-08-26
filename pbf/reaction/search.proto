@@ -3,7 +3,7 @@ syntax = "proto3";
 package reaction;
 option go_package = "./;reaction";
 
-// SearchI is the input for searching event reactions.
+// SearchI is the input for searching reactions.
 //
 //     {
 //         "filter": [
@@ -38,7 +38,7 @@ message SearchI_Object_Intern {}
 
 message SearchI_Object_Public {}
 
-// SearchO is the output for searching event reactions.
+// SearchO is the output for searching reactions.
 //
 //     {
 //         "filter": [
