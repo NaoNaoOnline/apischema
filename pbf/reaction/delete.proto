@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package rating;
-option go_package = "./;rating";
+package reaction;
+option go_package = "./;reaction";
 
-// DeleteI is the input for deleting ratings.
+// DeleteI is the input for deleting reactions.
 //
 //     {
 //         "object": []
@@ -25,7 +25,7 @@ message DeleteI_Object_Intern {}
 
 message DeleteI_Object_Public {}
 
-// DeleteO is the output for deleting ratings.
+// DeleteO is the output for deleting reactions.
 //
 //     {
 //         "object": []

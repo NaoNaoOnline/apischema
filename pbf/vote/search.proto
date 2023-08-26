@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package rating;
-option go_package = "./;rating";
+package vote;
+option go_package = "./;vote";
 
-// SearchI is the input for searching event ratings.
+// SearchI is the input for searching votes.
 //
 //     {
 //         "filter": [
@@ -12,7 +12,13 @@ option go_package = "./;rating";
 //                 "pointer": "100"
 //             }
 //         ],
-//         "object": []
+//         "object": [
+//             {
+//                 "intern": {
+//                     "desc": "98972893"
+//                 }
+//             }
+//         ]
 //     }
 //
 message SearchI {
@@ -34,11 +40,15 @@ message SearchI_Object {
   SearchI_Object_Public public = 200;
 }
 
-message SearchI_Object_Intern {}
+message SearchI_Object_Intern {
+  // desc is the ID of the description the user voted on. Given a description
+  // ID, all of the calling user's votes on that description can be looked up.
+  string desc = 100;
+}
 
 message SearchI_Object_Public {}
 
-// SearchO is the output for searching event ratings.
+// SearchO is the output for searching votes.
 //
 //     {
 //         "filter": [
@@ -51,12 +61,12 @@ message SearchI_Object_Public {}
 //             {
 //                 "intern": {
 //                     "crtd": "1689001255",
-//                     "rtng": "98972893",
-//                     "user": "551265"
+//                     "user": "551265",
+//                     "vote": "70032732"
 //                 },
 //                 "public": {
-//                     "html": "<svg width="15" height="15" >...</svg>",
-//                     "name": "heart"
+//                     "desc": "98972893",
+//                     "rctn": "113714405"
 //                 }
 //             },
 //             ...
@@ -76,17 +86,17 @@ message SearchO_Object {
 }
 
 message SearchO_Object_Intern {
-  // crtd is the unix timestamp in seconds at which the rating got created.
+  // crtd is the unix timestamp in seconds at which the vote got created.
   string crtd = 100;
-  // rtng is the ID of the rating being searched.
-  string rtng = 200;
-  // user is the ID of the user who created this rating.
-  string user = 300;
+  // user is the ID of the user who created this vote.
+  string user = 200;
+  // vote is the ID of the vote being searched.
+  string vote = 300;
 }
 
 message SearchO_Object_Public {
-  // html is the HTML of this rating icon, e.g. some svg code.
-  string html = 100;
-  // name is the rating name.
-  string name = 200;
+  // desc is the ID of the description the user voted on.
+  string desc = 100;
+  // rctn is the ID of the reaction the user used to vote.
+  string rctn = 200;
 }

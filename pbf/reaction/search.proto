@@ -1,0 +1,92 @@
+syntax = "proto3";
+
+package reaction;
+option go_package = "./;reaction";
+
+// SearchI is the input for searching reactions.
+//
+//     {
+//         "filter": [
+//             "chunking": {
+//                 "perpage": "50",
+//                 "pointer": "100"
+//             }
+//         ],
+//         "object": []
+//     }
+//
+message SearchI {
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
+}
+
+message SearchI_Filter {
+  SearchI_Filter_Chunking chunking = 100;
+}
+
+message SearchI_Filter_Chunking {
+  string perpage = 100;
+  string pointer = 200;
+}
+
+message SearchI_Object {
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {}
+
+message SearchI_Object_Public {}
+
+// SearchO is the output for searching reactions.
+//
+//     {
+//         "filter": [
+//             "chunking": {
+//                 "perpage": "50",
+//                 "pointer": "150"
+//             }
+//         ],
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "rctn": "113714405",
+//                     "user": "551265"
+//                 },
+//                 "public": {
+//                     "html": "<svg width="15" height="15" >...</svg>",
+//                     "name": "heart"
+//                 }
+//             },
+//             ...
+//         ]
+//     }
+//
+message SearchO {
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
+}
+
+message SearchO_Filter {}
+
+message SearchO_Object {
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the reaction got created.
+  string crtd = 100;
+  // rctn is the ID of the reaction being searched.
+  string rctn = 200;
+  // user is the ID of the user who created this reaction.
+  string user = 300;
+}
+
+message SearchO_Object_Public {
+  // html is the HTML of this reaction icon, e.g. some svg code.
+  string html = 100;
+  // name is the reaction name.
+  string name = 200;
+}

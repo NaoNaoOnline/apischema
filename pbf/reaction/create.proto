@@ -1,9 +1,9 @@
 syntax = "proto3";
 
-package rating;
-option go_package = "./;rating";
+package reaction;
+option go_package = "./;reaction";
 
-// CreateI is the input for creating ratings.
+// CreateI is the input for creating reactions.
 //
 //     {
 //         "object": []
@@ -25,7 +25,7 @@ message CreateI_Object_Intern {}
 
 message CreateI_Object_Public {}
 
-// CreateO is the output for creating ratings.
+// CreateO is the output for creating reactions.
 //
 //     {
 //         "object": []
