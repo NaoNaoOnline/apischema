@@ -40,12 +40,12 @@ message SearchI_Object {
   SearchI_Object_Public public = 200;
 }
 
-message SearchI_Object_Intern {
+message SearchI_Object_Intern {}
+
+message SearchI_Object_Public {
   // evnt is the event ID for which descriptions are being searched.
   string evnt = 100;
 }
-
-message SearchI_Object_Public {}
 
 // SearchO is the output for searching descriptions.
 //
@@ -65,11 +65,6 @@ message SearchI_Object_Public {}
 //                 },
 //                 "public": {
 //                     "evnt": "778237",
-//                     "rctn": {
-//                         "113714405": {
-//                             "amnt": 7
-//                         }
-//                     },
 //                     "text": "In this Hackathon we build awesome stuff!"
 //                 }
 //             },
@@ -101,17 +96,6 @@ message SearchO_Object_Intern {
 message SearchO_Object_Public {
   // evnt is the event ID this description is mapped to.
   string evnt = 100;
-  // TODO remove reaction map once vote API is implemented for managing
-  // decoupled user reactions.
-  //
-  // rctn is the map of aggregated quality measurement for this description
-  // based on user reactions where the map key is the reaction ID.
-  map<string, SearchO_Object_Public_Rctn> rctn = 200;
   // text is the description explaining what this event is about.
-  string text = 300;
-}
-
-message SearchO_Object_Public_Rctn {
-  // amnt is the number of times the accociated reaction got used.
-  int32 amnt = 100;
+  string text = 200;
 }

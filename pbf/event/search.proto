@@ -14,7 +14,7 @@ option go_package = "./;event";
 //         ],
 //         "object": [
 //             {
-//                 "intern": {
+//                 "public": {
 //                     "cate": "863826"
 //                 }
 //             }
@@ -41,15 +41,17 @@ message SearchI_Object {
 }
 
 message SearchI_Object_Intern {
-  // cate is the ID of the category label for which events are being searched.
-  string cate = 100;
-  // evnt is the ID of the event being searched.
-  string evnt = 200;
-  // host is the ID of the host label for which events are being searched.
-  string host = 300;
+  // evnt is the ID of the event being searched. If searching for a particular
+  // event, the search query object must neither contain cate or host.
+  string evnt = 100;
 }
 
-message SearchI_Object_Public {}
+message SearchI_Object_Public {
+  // cate is the ID of the category label for which events are being searched.
+  string cate = 100;
+  // host is the ID of the host label for which events are being searched.
+  string host = 200;
+}
 
 // SearchO is the output for searching events.
 //
