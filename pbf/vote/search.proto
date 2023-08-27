@@ -14,7 +14,7 @@ option go_package = "./;vote";
 //         ],
 //         "object": [
 //             {
-//                 "intern": {
+//                 "public": {
 //                     "desc": "98972893"
 //                 }
 //             }
@@ -40,13 +40,13 @@ message SearchI_Object {
   SearchI_Object_Public public = 200;
 }
 
-message SearchI_Object_Intern {
-  // desc is the ID of the description the user voted on. Given a description
-  // ID, all of the calling user's votes on that description can be looked up.
+message SearchI_Object_Intern {}
+
+message SearchI_Object_Public {
+  // desc is the ID of the description all users voted on. Given a description
+  // ID, all votes on that description can be looked up.
   string desc = 100;
 }
-
-message SearchI_Object_Public {}
 
 // SearchO is the output for searching votes.
 //
