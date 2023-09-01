@@ -7,9 +7,38 @@ languages and remain mostly independent of transport layer specifics.
 
 
 
+### Contexts
+
+All APIs allow for multiple action specific contexts, each of which defines a
+certain behaviour. Create APIs allow for multiple create query objects. Search
+APIs allow for multiple search query objects. Each object represents a context
+defining its own behaviour.
+
+```json
+{
+    "object": [
+        {
+            "intern": {
+              "evnt": "123"
+            },
+            "public": {}
+        },
+        {
+            "intern": {},
+            "public": {
+              "cate": "456",
+              "host": "789",
+            }
+        },
+    ]
+}
+```
+
+
+
 ### Formatting
 
-```
+```bash
 clang-format -i $(find ./pbf -name "*.proto")
 ```
 
@@ -49,14 +78,13 @@ the response would contain the first batch of 100 items. Consecutive calls would
 require the pointer returned with the preceding response in order to continue
 fetching the next batches accordingly.
 
-```
+```json
 {
     "filter": {
         "chunking": {
             "pointer": 0,
             "perpage": 100
         },
-        ...
     }
 }
 ```
@@ -65,7 +93,7 @@ With pagination the response would as well contain `filter.chunking`. When
 receiving search responses there will always be the `result` list of requested
 data objects.
 
-```
+```json
 {
     "filter": {
         "chunking": {
@@ -74,9 +102,9 @@ data objects.
         }
     },
     "result": [
-        { ... },
-        { ... },
-        { ... }
+        {},
+        {},
+        {}
     ]
 }
 ```
