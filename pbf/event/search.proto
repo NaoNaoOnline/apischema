@@ -35,17 +35,10 @@ message SearchI_Filter_Chunking {
   string pointer = 200;
 }
 
-// SearchI_Object defines search queries for fetching event objects in various
-// ways, see properties of SearchI_Object_Intern and SearchI_Object_Public
-// respectively for detailed information.
-//
-// Not providing any search query returns the limited default response of event
-// objects indexed by event start time. That is, the list of events that are
-// going on right now, including events that already happened, and events that
-// will happen in the near future.
 message SearchI_Object {
   SearchI_Object_Intern intern = 100;
   SearchI_Object_Public public = 200;
+  SearchI_Object_Symbol symbol = 300;
 }
 
 message SearchI_Object_Intern {
@@ -70,6 +63,20 @@ message SearchI_Object_Public {
   // that search query context. That is, searching for { A, B, C } returns event
   // objects that are associated to A, B and C.
   string host = 200;
+}
+
+message SearchI_Object_Symbol {
+  // ltst set to "default" returns the latest event objects indexed by event
+  // start time. That is, the list of events that are going on right now,
+  // including events that already happened, and events that will happen in the
+  // near future. The time horizon of the search query is limited to one week in
+  // the past and one week in the future.
+  string ltst = 100;
+  // rctn set to "default" returns the event objects indexed by the calling
+  // user's reactions. That is, the list of events that the calling user reacted
+  // to in the past. Neither the amount nor the kind of reactions to any event
+  // matter. If the calling user reacted to an event, it will be returned here.
+  string rctn = 200;
 }
 
 // SearchO is the output for searching events.
