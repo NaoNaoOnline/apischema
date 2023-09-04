@@ -14,6 +14,15 @@ certain behaviour. Create APIs allow for multiple create query objects. Search
 APIs allow for multiple search query objects. Each object represents a context
 defining its own behaviour.
 
+
+
+##### Intern
+
+Intern search queries reference internally managed fields of the underlying
+resource objects. The search query below returns the event object associated to
+the specified event ID, which in turn originated from the system at resource
+creation.
+
 ```json
 {
     "object": [
@@ -21,15 +30,55 @@ defining its own behaviour.
             "intern": {
               "evnt": "123"
             },
-            "public": {}
-        },
+            "public": {},
+            "symbol": {}
+        }
+    ]
+}
+```
+
+
+
+##### Public
+
+Public search queries reference publicly provided fields of the underlying
+resource objects. The search query below returns a list of event objects
+associated to the specified label IDs, which were added to the event by the user
+upon resource creation.
+
+```json
+{
+    "object": [
         {
             "intern": {},
             "public": {
               "cate": "456",
               "host": "789",
+            },
+            "symbol": {}
+        }
+    ]
+}
+```
+
+
+
+##### Symbol
+
+Symbol search queries execute arbitrary logic to return resource objects
+matching certain use case requirements. The search query below resolves to the
+list of events the calling user reacted to in the past.
+
+```json
+{
+    "object": [
+        {
+            "intern": {},
+            "public": {},
+            "symbol": {
+              "rctn": "default"
             }
-        },
+        }
     ]
 }
 ```
