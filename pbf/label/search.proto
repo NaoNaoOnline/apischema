@@ -46,8 +46,12 @@ message SearchI_Object_Intern {
 }
 
 message SearchI_Object_Public {
-  // kind is the label type for which events are being searched, e.g. host for
-  // host labels and cate for category labels.
+  // kind is the label type for which labels are being searched.
+  //
+  //     bltn for system labels
+  //     cate for category labels
+  //     host for host labels
+  //
   string kind = 100;
 }
 
@@ -92,14 +96,12 @@ message SearchO_Object {
 }
 
 message SearchO_Object_Intern {
-  // bltn expresses whether this label is natively supported by the system.
-  bool bltn = 100;
   // crtd is the unix timestamp in seconds at which the label got created.
-  string crtd = 200;
+  string crtd = 100;
   // labl is the ID of the label being searched.
-  string labl = 300;
+  string labl = 200;
   // user is the ID of the user who created this label.
-  string user = 400;
+  string user = 300;
 }
 
 message SearchO_Object_Public {
@@ -107,8 +109,12 @@ message SearchO_Object_Public {
   string desc = 100;
   // disc is the label's Discord link.
   string disc = 200;
-  // kind is the label type, e.g. host for host labels and cate for category
-  // labels.
+  // kind is the label type.
+  //
+  //     bltn for system labels
+  //     cate for category labels
+  //     host for host labels
+  //
   string kind = 300;
   // name is the label name.
   string name = 400;
