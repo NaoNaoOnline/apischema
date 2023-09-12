@@ -76,12 +76,14 @@ message SearchO_Object {
 }
 
 message SearchO_Object_Intern {
+  // bltn expresses whether this reaction is natively supported by the system.
+  bool bltn = 100;
   // crtd is the unix timestamp in seconds at which the reaction got created.
-  string crtd = 100;
+  string crtd = 200;
   // rctn is the ID of the reaction being searched.
-  string rctn = 200;
+  string rctn = 300;
   // user is the ID of the user who created this reaction.
-  string user = 300;
+  string user = 400;
 }
 
 message SearchO_Object_Public {
