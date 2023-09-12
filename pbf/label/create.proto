@@ -38,8 +38,11 @@ message CreateI_Object_Public {
   string desc = 100;
   // disc is the label's Discord link.
   string disc = 200;
-  // kind is the label type, e.g. host for host labels and cate for category
-  // labels.
+  // kind is the label type for which the label is being created.
+  //
+  //     cate for category labels
+  //     host for host labels
+  //
   string kind = 300;
   // name is the label name.
   string name = 400;

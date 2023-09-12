@@ -12,7 +12,13 @@ option go_package = "./;reaction";
 //                 "pointer": "100"
 //             }
 //         ],
-//         "object": []
+//         "object": [
+//             {
+//                 "public": {
+//                     "kind": "bltn"
+//                 }
+//             }
+//         ]
 //     }
 //
 message SearchI {
@@ -36,7 +42,14 @@ message SearchI_Object {
 
 message SearchI_Object_Intern {}
 
-message SearchI_Object_Public {}
+message SearchI_Object_Public {
+  // kind is the reaction type for which reactions are being searched.
+  //
+  //     bltn for system reactions
+  //     user for custom reactions
+  //
+  string kind = 100;
+}
 
 // SearchO is the output for searching reactions.
 //
@@ -55,8 +68,9 @@ message SearchI_Object_Public {}
 //                     "user": "551265"
 //                 },
 //                 "public": {
-//                     "html": "<svg width="15" height="15" >...</svg>",
-//                     "name": "heart"
+//                     "html": "😍",
+//                     "kind": "bltn",
+//                     "name": "Smiling Face With Heart Eyes"
 //                 }
 //             },
 //             ...
@@ -76,19 +90,23 @@ message SearchO_Object {
 }
 
 message SearchO_Object_Intern {
-  // bltn expresses whether this reaction is natively supported by the system.
-  bool bltn = 100;
   // crtd is the unix timestamp in seconds at which the reaction got created.
-  string crtd = 200;
+  string crtd = 100;
   // rctn is the ID of the reaction being searched.
-  string rctn = 300;
+  string rctn = 200;
   // user is the ID of the user who created this reaction.
-  string user = 400;
+  string user = 300;
 }
 
 message SearchO_Object_Public {
   // html is the HTML of this reaction icon, e.g. some svg code.
   string html = 100;
+  // kind is the reaction type.
+  //
+  //     bltn for system reactions
+  //     user for custom reactions
+  //
+  string kind = 200;
   // name is the reaction name.
-  string name = 200;
+  string name = 300;
 }
