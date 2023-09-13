@@ -43,9 +43,12 @@ message SearchI_Object {
 
 message SearchI_Object_Intern {
   // evnt is the ID of the event being searched. If searching for a particular
-  // event, the search query object must neither contain cate or host within the
-  // same search query object.
+  // event, the search query object must not contain any other fields.
   string evnt = 100;
+  // user is the ID of the user having created the events being searched. If
+  // searching for events created by a particular user, the search query object
+  // must not contain any other fields.
+  string user = 200;
 }
 
 message SearchI_Object_Public {
