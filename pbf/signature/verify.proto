@@ -1,0 +1,73 @@
+syntax = "proto3";
+
+package signature;
+option go_package = "./;signature";
+
+// VerifyI is the input for verifying signatures.
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "mess": "It's-a me, Mario!",
+//                     "pubk": "0x1234",
+//                     "sign": "0x2345"
+//                 }
+//             }
+//         ]
+//     }
+//
+message VerifyI {
+  VerifyI_Filter filter = 100;
+  repeated VerifyI_Object object = 200;
+}
+
+message VerifyI_Filter {}
+
+message VerifyI_Object {
+  VerifyI_Object_Intern intern = 100;
+  VerifyI_Object_Public public = 200;
+}
+
+message VerifyI_Object_Intern {}
+
+message VerifyI_Object_Public {
+  // mess is the message to sign.
+  string mess = 100;
+  // pubk is the hex encoded compressed public key expected to be recovered from
+  // the given signature.
+  string pubk = 200;
+  // sign is the signature of the given message.
+  string sign = 300;
+}
+
+// VerifyO is the output for verifying signatures.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "stts": "verified"
+//                 }
+//             }
+//         ]
+//     }
+//
+message VerifyO {
+  VerifyO_Filter filter = 100;
+  repeated VerifyO_Object object = 200;
+}
+
+message VerifyO_Filter {}
+
+message VerifyO_Object {
+  VerifyO_Object_Intern intern = 100;
+  VerifyO_Object_Public public = 200;
+}
+
+message VerifyO_Object_Intern {
+  // stts is the resource status upon successful signature verification.
+  string stts = 100;
+}
+
+message VerifyO_Object_Public {}
