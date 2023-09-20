@@ -1,0 +1,120 @@
+syntax = "proto3";
+
+package wallet;
+option go_package = "./;wallet";
+
+// SearchI is the input for searching wallets. Note that search queries for
+// wallets must be authenticated. Also note that search queries for wallets are
+// scoped to the calling user. That is, the caller can only ever search for
+// their own wallets.
+//
+//     {
+//         "filter": [
+//             "chunking": {
+//                 "perpage": "50",
+//                 "pointer": "100"
+//             }
+//         ],
+//         "object": [
+//             {
+//                 "public": {
+//                     "kind": "eth"
+//                 }
+//             }
+//         ]
+//     }
+//
+message SearchI {
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
+}
+
+message SearchI_Filter {
+  SearchI_Filter_Chunking chunking = 100;
+}
+
+message SearchI_Filter_Chunking {
+  string perpage = 100;
+  string pointer = 200;
+}
+
+message SearchI_Object {
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {
+  // wllt is the ID of the wallet being searched.
+  string wllt = 100;
+}
+
+message SearchI_Object_Public {
+  // kind is the wallet type for which wallets are being searched.
+  //
+  //     eth for ethereum wallets
+  //
+  string kind = 100;
+}
+
+// SearchO is the output for searching wallets.
+//
+//     {
+//         "filter": [
+//             "chunking": {
+//                 "perpage": "50",
+//                 "pointer": "150"
+//             }
+//         ],
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "user": "551265",
+//                     "wllt": "338912367"
+//                 },
+//                 "public": {
+//                     "kind": "eth",
+//                     "mess": "It's-a me, Mario!",
+//                     "pubk": "0x1234",
+//                     "sign": "0x2345"
+//                 }
+//             },
+//             ...
+//         ]
+//     }
+//
+message SearchO {
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
+}
+
+message SearchO_Filter {}
+
+message SearchO_Object {
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the wallet got created.
+  string crtd = 100;
+  // user is the ID of the user who created this wallet.
+  string user = 200;
+  // wllt is the ID of the wallet being searched.
+  string wllt = 300;
+}
+
+message SearchO_Object_Public {
+  // kind is the wallet type.
+  //
+  //     eth for ethereum wallets
+  //
+  string kind = 100;
+  // mess is the message being signed.
+  string mess = 200;
+  // pubk is the hex encoded compressed public key recovered from the given
+  // signature.
+  string pubk = 300;
+  // sign is the signature of the signed message.
+  string sign = 400;
+}
