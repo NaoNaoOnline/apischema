@@ -12,7 +12,7 @@ option go_package = "./;wallet";
 //         "object": [
 //             {
 //                 "public": {
-//                     "kind": "host",
+//                     "kind": "eth",
 //                     "mess": "It's-a me, Mario!",
 //                     "pubk": "0x1234",
 //                     "sign": "0x2345"
