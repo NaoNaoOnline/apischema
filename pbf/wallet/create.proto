@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package wallet;
+option go_package = "./;wallet";
+
+// CreateI is the input for creating wallets. Note that create queries for
+// wallets must be authenticated. Also note that create queries for wallets are
+// scoped to the calling user. That is, the caller can only ever create wallets
+// for themselves by providing a valid signature.
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "kind": "host",
+//                     "mess": "It's-a me, Mario!",
+//                     "pubk": "0x1234",
+//                     "sign": "0x2345"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateI {
+  CreateI_Filter filter = 100;
+  repeated CreateI_Object object = 200;
+}
+
+message CreateI_Filter {}
+
+message CreateI_Object {
+  CreateI_Object_Intern intern = 100;
+  CreateI_Object_Public public = 200;
+}
+
+message CreateI_Object_Intern {}
+
+message CreateI_Object_Public {
+  // kind is the wallet type for which the wallet is being created.
+  //
+  //     eth for ethereum wallets
+  //
+  string kind = 100;
+  // mess is the message to sign.
+  string mess = 200;
+  // pubk is the hex encoded compressed public key expected to be recovered from
+  // the given signature.
+  string pubk = 300;
+  // sign is the signature of the signed message.
+  string sign = 400;
+}
+
+// CreateO is the output for creating wallets.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "wllt": "338912367"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateO {
+  CreateO_Filter filter = 100;
+  repeated CreateO_Object object = 200;
+}
+
+message CreateO_Filter {}
+
+message CreateO_Object {
+  CreateO_Object_Intern intern = 100;
+  CreateO_Object_Public public = 200;
+}
+
+message CreateO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the wallet got created.
+  string crtd = 100;
+  // wllt is the ID of the wallet being created.
+  string wllt = 200;
+}
+
+message CreateO_Object_Public {}
