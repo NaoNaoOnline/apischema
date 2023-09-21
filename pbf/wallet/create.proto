@@ -13,7 +13,7 @@ option go_package = "./;wallet";
 //             {
 //                 "public": {
 //                     "kind": "eth",
-//                     "mess": "It's-a me, Mario!",
+//                     "mess": "signing ownership of 0x001 at 1689001255",
 //                     "pubk": "0x1234",
 //                     "sign": "0x2345"
 //                 }
@@ -41,12 +41,15 @@ message CreateI_Object_Public {
   //     eth for ethereum wallets
   //
   string kind = 100;
-  // mess is the message to sign.
+  // mess is the message to sign. It is ephemeral and will not be stored in the
+  // backend.
   string mess = 200;
-  // pubk is the hex encoded compressed public key expected to be recovered from
-  // the given signature.
+  // pubk is the hex encoded public key expected to be recovered from the given
+  // signature during the signature verification challenge. It is ephemeral and
+  // will not be stored in the backend.
   string pubk = 300;
-  // sign is the signature of the signed message.
+  // sign is the signature of the signed message. It is ephemeral and will not
+  // be stored in the backend.
   string sign = 400;
 }
 
