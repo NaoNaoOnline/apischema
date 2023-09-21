@@ -69,14 +69,13 @@ message SearchI_Object_Public {
 //             {
 //                 "intern": {
 //                     "crtd": "1689001255",
+//                     "last": "1695326765",
 //                     "user": "551265",
 //                     "wllt": "338912367"
 //                 },
 //                 "public": {
-//                     "kind": "eth",
-//                     "mess": "It's-a me, Mario!",
-//                     "pubk": "0x1234",
-//                     "sign": "0x2345"
+//                     "addr": "0x0001",
+//                     "kind": "eth"
 //                 }
 //             },
 //             ...
@@ -98,23 +97,22 @@ message SearchO_Object {
 message SearchO_Object_Intern {
   // crtd is the unix timestamp in seconds at which the wallet got created.
   string crtd = 100;
+  // Last is the unix timestamp in seconds of the most recent time at which this
+  // wallet got re-validated by signing a message again.
+  string last = 200;
   // user is the ID of the user who created this wallet.
-  string user = 200;
+  string user = 300;
   // wllt is the ID of the wallet being searched.
-  string wllt = 300;
+  string wllt = 400;
 }
 
 message SearchO_Object_Public {
+  // addr is the hex encoded wallet address derived from the public key provided
+  // during signature verification.
+  string addr = 100;
   // kind is the wallet type.
   //
   //     eth for ethereum wallets
   //
-  string kind = 100;
-  // mess is the message being signed.
-  string mess = 200;
-  // pubk is the hex encoded compressed public key recovered from the given
-  // signature.
-  string pubk = 300;
-  // sign is the signature of the signed message.
-  string sign = 400;
+  string kind = 200;
 }
