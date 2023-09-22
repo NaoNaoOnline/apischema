@@ -11,7 +11,7 @@ option go_package = "./;user";
 //                 "intern": {
 //                     "user": "551265"
 //                 }
-//                 "public": [
+//                 "update": [
 //                     {
 //                         "ope": "replace",
 //                         "pat": "/obj/property/name",
@@ -32,6 +32,7 @@ message UpdateI_Filter {}
 message UpdateI_Object {
   UpdateI_Object_Intern intern = 100;
   repeated UpdateI_Object_Public public = 200;
+  repeated UpdateI_Object_Update update = 300;
 }
 
 message UpdateI_Object_Intern {
@@ -39,7 +40,9 @@ message UpdateI_Object_Intern {
   string user = 100;
 }
 
-message UpdateI_Object_Public {
+message UpdateI_Object_Public {}
+
+message UpdateI_Object_Update {
   string ope = 100;
   string pat = 200;
   optional string val = 300;
