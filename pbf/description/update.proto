@@ -31,13 +31,16 @@ message UpdateI_Filter {}
 
 message UpdateI_Object {
   UpdateI_Object_Intern intern = 100;
-  repeated UpdateI_Object_Update update = 200;
+  repeated UpdateI_Object_Public public = 200;
+  repeated UpdateI_Object_Update update = 300;
 }
 
 message UpdateI_Object_Intern {
   // desc is the ID of the description being updated.
   string desc = 100;
 }
+
+message UpdateI_Object_Public {}
 
 message UpdateI_Object_Update {
   string ope = 100;

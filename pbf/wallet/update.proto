@@ -3,10 +3,23 @@ syntax = "proto3";
 package wallet;
 option go_package = "./;wallet";
 
-// UpdateI is the input for updating wallets.
+// UpdateI is the input for updating wallets. Solving the signature verification
+// challenge again for an existing wallet updates object.intern.last. That is,
+// refreshing the wallet's validity and its user's ownership claim.
 //
 //     {
-//         "object": []
+//         "object": [
+//             {
+//                 "intern": {
+//                     "wllt": "338912367"
+//                 },
+//                 "public": {
+//                     "mess": "signing ownership of 0x001 at 1689001255",
+//                     "pubk": "0x1234",
+//                     "sign": "0x2345"
+//                 }
+//             }
+//         ]
 //     }
 //
 message UpdateI {
@@ -18,17 +31,40 @@ message UpdateI_Filter {}
 
 message UpdateI_Object {
   UpdateI_Object_Intern intern = 100;
-  repeated UpdateI_Object_Update update = 200;
+  repeated UpdateI_Object_Public public = 200;
+  repeated UpdateI_Object_Update update = 300;
 }
 
-message UpdateI_Object_Intern {}
+message UpdateI_Object_Intern {
+  // wllt is the ID of the wallet being updated.
+  string wllt = 100;
+}
+
+message UpdateI_Object_Public {
+  // mess is the message to sign. It is ephemeral and will not be stored in the
+  // backend.
+  string mess = 100;
+  // pubk is the hex encoded public key expected to be recovered from the given
+  // signature during the signature verification challenge. It is ephemeral and
+  // will not be stored in the backend.
+  string pubk = 200;
+  // sign is the signature of the signed message. It is ephemeral and will not
+  // be stored in the backend.
+  string sign = 300;
+}
 
 message UpdateI_Object_Update {}
 
 // UpdateO is the output for updating wallets.
 //
 //     {
-//         "object": []
+//         "object": [
+//             {
+//                 "intern": {
+//                     "stts": "updated"
+//                 }
+//             }
+//         ]
 //     }
 //
 message UpdateO {
@@ -43,6 +79,9 @@ message UpdateO_Object {
   UpdateO_Object_Public public = 200;
 }
 
-message UpdateO_Object_Intern {}
+message UpdateO_Object_Intern {
+  // stts is the resource status upon successful wallet modification.
+  string stts = 100;
+}
 
 message UpdateO_Object_Public {}
