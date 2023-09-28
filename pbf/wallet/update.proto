@@ -61,6 +61,9 @@ message UpdateI_Object_Update {}
 //         "object": [
 //             {
 //                 "intern": {
+//                     "addr": {
+//                         "time": "1695326765"
+//                     },
 //                     "stts": "updated"
 //                 }
 //             }
@@ -80,8 +83,16 @@ message UpdateO_Object {
 }
 
 message UpdateO_Object_Intern {
+  // addr contains lifecycle metadata for this wallet object.
+  UpdateO_Object_Intern_Addr addr = 100;
   // stts is the resource status upon successful wallet modification.
-  string stts = 100;
+  string stts = 200;
+}
+
+message UpdateO_Object_Intern_Addr {
+  // Time is the unix timestamp in seconds of the most recent time at which this
+  // wallet got re-validated by signing a message again.
+  string time = 100;
 }
 
 message UpdateO_Object_Public {}

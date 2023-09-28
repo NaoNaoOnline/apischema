@@ -68,8 +68,10 @@ message SearchI_Object_Public {
 //         "object": [
 //             {
 //                 "intern": {
+//                     "addr": {
+//                         "time": "1695326765"
+//                     },
 //                     "crtd": "1689001255",
-//                     "last": "1695326765",
 //                     "user": "551265",
 //                     "wllt": "338912367"
 //                 },
@@ -95,15 +97,20 @@ message SearchO_Object {
 }
 
 message SearchO_Object_Intern {
+  // addr contains lifecycle metadata for this wallet object.
+  SearchO_Object_Intern_Addr addr = 100;
   // crtd is the unix timestamp in seconds at which the wallet got created.
-  string crtd = 100;
-  // Last is the unix timestamp in seconds of the most recent time at which this
-  // wallet got re-validated by signing a message again.
-  string last = 200;
+  string crtd = 200;
   // user is the ID of the user who created this wallet.
   string user = 300;
   // wllt is the ID of the wallet being searched.
   string wllt = 400;
+}
+
+message SearchO_Object_Intern_Addr {
+  // Time is the unix timestamp in seconds of the most recent time at which this
+  // wallet got re-validated by signing a message again.
+  string time = 100;
 }
 
 message SearchO_Object_Public {
