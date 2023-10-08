@@ -48,7 +48,7 @@ message SearchI_Object {
 
 message SearchI_Object_Intern {
   // kind is the record type for which policies are being searched. Providing
-  // kind may only be allowed if ltst is set to "raw".
+  // kind may only be allowed if ltst is set to "proxy".
   //
   //     CreateMember for records of members being created within a system
   //     CreateSystem for records of systems being created
@@ -73,9 +73,9 @@ message SearchI_Object_Symbol {
   // authorization states, minus the list of records that have been removed so
   // far.
   //
-  // ltst set to "raw" returns the complete list of records submitted so far.
-  // This raw data is not aggregated, transparently representing the onchain
-  // state of emitted smart contract events currently cached internally.
+  // ltst set to "proxy" returns the complete list of records submitted so far
+  // onchain. This raw data is not aggregated, transparently representing the
+  // onchain state of emitted smart contract events currently cached internally.
   //
   // Note that indexing happens periodically in a background process, which can
   // be triggered by policy members to update the cached state on demand using
@@ -95,13 +95,15 @@ message SearchI_Object_Symbol {
 //         "object": [
 //             {
 //                 "intern": {
-//                     "chid": "42161",
-//                     "from": "0x1234",
-//                     "hash": "0x2345",
-//                     "kind": "CreateMember"
+//                     "crtd": "1689001255",
+//                     "plcy": "1128376"
 //                 },
 //                 "public": {
 //                     "acce": "2",
+//                     "chid": "42161",
+//                     "from": "0x1234",
+//                     "hash": "0x2345",
+//                     "kind": "CreateMember",
 //                     "memb": "0x3456",
 //                     "syst": "0"
 //                 }
@@ -130,14 +132,26 @@ message SearchO_Object {
 }
 
 message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the record got created. Note
+  // that policy records are external data objects that get created somewhere
+  // else and thus must bring a created timestamp with them. So the created
+  // timestamp here originates from some blockchain network.
+  string crtd = 100;
+  // plcy is the ID of the record being searched.
+  string plcy = 200;
+}
+
+message SearchO_Object_Public {
+  // acce is the SMA record level, permission or role.
+  string acce = 100;
   // chid is the chain ID, the unique identifier representing the blockchain
   // network on which this record is located.
-  string chid = 100;
+  string chid = 200;
   // from is the record creator, the sender of the transaction that submitted
   // this record.
-  string from = 200;
+  string from = 300;
   // hash is the onchain transaction hash that submitted this record.
-  string hash = 300;
+  string hash = 400;
   // kind is the record type.
   //
   //     CreateMember for records of members being created within a system
@@ -145,14 +159,9 @@ message SearchO_Object_Intern {
   //     DeleteMember for records of members being deleted within a system
   //     DeleteSystem for records of systems being deleted
   //
-  string kind = 400;
-}
-
-message SearchO_Object_Public {
-  // acce is the record level, permission or role.
-  string acce = 100;
-  // memb is the record account, identity or user.
-  string memb = 200;
-  // syst is the record context, resource or scope.
-  string syst = 300;
+  string kind = 500;
+  // memb is the SMA record account, identity or user.
+  string memb = 600;
+  // syst is the SMA record context, resource or scope.
+  string syst = 700;
 }
