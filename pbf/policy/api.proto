@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package policy;
+option go_package = "./;policy";
+
+import "pbf/policy/create.proto";
+import "pbf/policy/delete.proto";
+import "pbf/policy/search.proto";
+import "pbf/policy/update.proto";
+
+service API {
+  rpc Create(CreateI) returns (CreateO) {}
+  rpc Delete(DeleteI) returns (DeleteO) {}
+  rpc Search(SearchI) returns (SearchO) {}
+  rpc Update(UpdateI) returns (UpdateO) {}
+}

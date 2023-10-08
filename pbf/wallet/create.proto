@@ -13,13 +13,19 @@ option go_package = "./;wallet";
 //             {
 //                 "public": {
 //                     "kind": "eth",
-//                     "mess": "signing ownership of 0x001 at 1689001255",
+//                     "mess": "...",
 //                     "pubk": "0x1234",
 //                     "sign": "0x2345"
 //                 }
 //             }
 //         ]
 //     }
+//
+// The message format is expected to be as shown below.
+//
+//     signing ownership of [    addr    ] at [  unix  ]
+//
+//     signing ownership of 0x7483••••ba5B at 1695326302
 //
 message CreateI {
   CreateI_Filter filter = 100;

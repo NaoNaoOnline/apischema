@@ -130,24 +130,24 @@ fetching the next batches accordingly.
 ```json
 {
     "filter": {
-        "chunking": {
-            "pointer": 0,
-            "perpage": 100
-        },
+        "paging": {
+            "perpage": "50",
+            "pointer": "100"
+        }
     }
 }
 ```
 
-With pagination the response would as well contain `filter.chunking`. When
+With pagination the response would as well contain `filter.paging`. When
 receiving search responses there will always be the `result` list of requested
 data objects.
 
 ```json
 {
     "filter": {
-        "chunking": {
-            "pointer": 123,
-            "intotal": 750
+        "paging": {
+            "intotal": 750,
+            "pointer": 150
         }
     },
     "result": [

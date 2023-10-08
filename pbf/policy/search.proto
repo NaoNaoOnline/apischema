@@ -1,0 +1,157 @@
+syntax = "proto3";
+
+package policy;
+option go_package = "./;policy";
+
+// SearchI is the input for searching policies.
+//
+//     {
+//         "filter": {
+//             "paging": {
+//                 "perpage": "50",
+//                 "pointer": "100"
+//             }
+//         },
+//         "object": [
+//             {
+//                 "symbol": {
+//                     "ltst": "default"
+//                 }
+//             }
+//         ]
+//     }
+//
+// For more information about the policy contracts, record types and SMAs, see
+// the contracts repository on Github.
+//
+//     https://github.com/NaoNaoOnline/contracts
+//
+message SearchI {
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
+}
+
+message SearchI_Filter {
+  SearchI_Filter_Paging paging = 100;
+}
+
+message SearchI_Filter_Paging {
+  string perpage = 100;
+  string pointer = 200;
+}
+
+message SearchI_Object {
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+  SearchI_Object_Symbol symbol = 300;
+}
+
+message SearchI_Object_Intern {
+  // kind is the record type for which policies are being searched.
+  //
+  //     CreateMember for records of members being created within a system
+  //     CreateSystem for records of systems being created
+  //     DeleteMember for records of members being deleted within a system
+  //     DeleteSystem for records of systems being deleted
+  //
+  string kind = 100;
+}
+
+message SearchI_Object_Public {}
+
+message SearchI_Object_Symbol {
+  // ltst set to "default" returns the latest aggregated version of cached
+  // policy records indexed from all onchain smart contracts configured. That
+  // is, the list of aggregated records representing the currently active
+  // authorization states, plus the list of records that have been removed so
+  // far.
+  //
+  // ltst set to "aggregated" returns the latest aggregated version of cached
+  // policy records indexed from all onchain smart contracts configured. That
+  // is, the list of aggregated records representing the currently active
+  // authorization states, minus the list of records that have been removed so
+  // far.
+  //
+  // ltst set to "raw" returns the complete list of records submitted so far.
+  // This raw data is not aggregated, transparently representing the onchain
+  // state of emitted smart contract events.
+  //
+  // Note that indexing happens periodically in a background process, which can
+  // be triggered by policy members to update the cached state on demand using
+  // policy.API/Update.
+  string ltst = 100;
+}
+
+// SearchO is the output for searching policies.
+//
+//     {
+//         "filter": {
+//             "paging": {
+//                 "intotal": 750,
+//                 "pointer": 150
+//             }
+//         },
+//         "object": [
+//             {
+//                 "intern": {
+//                     "chid": "42161",
+//                     "from": "0x1234",
+//                     "hash": "0x2345",
+//                     "kind": "CreateMember"
+//                 },
+//                 "public": {
+//                     "acce": "2",
+//                     "memb": "0x3456",
+//                     "syst": "0"
+//                 }
+//             },
+//             ...
+//         ]
+//     }
+//
+message SearchO {
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
+}
+
+message SearchO_Filter {
+  SearchO_Filter_Paging paging = 100;
+}
+
+message SearchO_Filter_Paging {
+  string intotal = 100;
+  string pointer = 200;
+}
+
+message SearchO_Object {
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // chid is the chain ID, the unique identifier representing the blockchain
+  // network on which this record is located.
+  string chid = 100;
+  // from is the record creator, the sender of the transaction that submitted
+  // this record.
+  string from = 200;
+  // hash is the onchain transaction hash that submitted this record.
+  string hash = 300;
+  // kind is the record type.
+  //
+  //     CreateMember for records of members being created within a system
+  //     CreateSystem for records of systems being created
+  //     DeleteMember for records of members being deleted within a system
+  //     DeleteSystem for records of systems being deleted
+  //
+  string kind = 400;
+}
+
+message SearchO_Object_Public {
+  // acce is the record level, permission or role.
+  string acce = 100;
+  // memb is the record account, identity or user.
+  string memb = 200;
+  // syst is the record context, resource or scope.
+  string syst = 300;
+}
