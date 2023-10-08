@@ -35,8 +35,9 @@ message UpdateI_Object_Public {}
 
 message UpdateI_Object_Symbol {
   // sync set to "default" starts a background process to synchronize onchain
-  // and offchain state. That way the current state can be fetched on demand
-  // without having to wait for the scheduled background job to be triggered.
+  // and offchain state. That way the current state can be fetched on demand by
+  // policy members without having to wait for the scheduled background job to
+  // be triggered.
   string sync = 100;
 }
 
