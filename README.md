@@ -146,8 +146,8 @@ data objects.
 {
     "filter": {
         "paging": {
-            "intotal": 750,
-            "pointer": 150
+            "intotal": "750",
+            "pointer": "150"
         }
     },
     "result": [
