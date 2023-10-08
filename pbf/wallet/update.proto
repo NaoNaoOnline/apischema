@@ -14,13 +14,19 @@ option go_package = "./;wallet";
 //                     "wllt": "338912367"
 //                 },
 //                 "public": {
-//                     "mess": "signing ownership of 0x001 at 1689001255",
+//                     "mess": "...",
 //                     "pubk": "0x1234",
 //                     "sign": "0x2345"
 //                 }
 //             }
 //         ]
 //     }
+//
+// The message format is expected to be as shown below.
+//
+//     signing ownership of [    addr    ] at [  unix  ]
+//
+//     signing ownership of 0x7483••••ba5B at 1695326302
 //
 message UpdateI {
   UpdateI_Filter filter = 100;
@@ -32,7 +38,8 @@ message UpdateI_Filter {}
 message UpdateI_Object {
   UpdateI_Object_Intern intern = 100;
   UpdateI_Object_Public public = 200;
-  repeated UpdateI_Object_Update update = 300;
+  UpdateI_Object_Symbol symbol = 300;
+  repeated UpdateI_Object_Update update = 400;
 }
 
 message UpdateI_Object_Intern {
@@ -52,6 +59,8 @@ message UpdateI_Object_Public {
   // be stored in the backend.
   string sign = 300;
 }
+
+message UpdateI_Object_Symbol {}
 
 message UpdateI_Object_Update {}
 

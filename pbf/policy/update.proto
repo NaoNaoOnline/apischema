@@ -1,23 +1,16 @@
 syntax = "proto3";
 
-package label;
-option go_package = "./;label";
+package policy;
+option go_package = "./;policy";
 
-// UpdateI is the input for updating labels.
+// UpdateI is the input for updating policies.
 //
 //     {
 //         "object": [
 //             {
-//                 "intern": {
-//                     "labl": "863826"
+//                 "symbol": {
+//                     "sync": "default"
 //                 }
-//                 "update": [
-//                     {
-//                         "ope": "replace",
-//                         "pat": "/obj/property/name",
-//                         "val": "flashbots"
-//                     }
-//                 ]
 //             }
 //         ]
 //     }
@@ -36,28 +29,27 @@ message UpdateI_Object {
   repeated UpdateI_Object_Update update = 400;
 }
 
-message UpdateI_Object_Intern {
-  // labl is the ID of the label being updated.
-  string labl = 100;
-}
+message UpdateI_Object_Intern {}
 
 message UpdateI_Object_Public {}
 
-message UpdateI_Object_Symbol {}
-
-message UpdateI_Object_Update {
-  string ope = 100;
-  string pat = 200;
-  optional string val = 300;
+message UpdateI_Object_Symbol {
+  // sync set to "default" starts a background process to synchronize onchain
+  // and offchain state. That way the current state can be fetched on demand by
+  // policy members without having to wait for the scheduled background job to
+  // be triggered.
+  string sync = 100;
 }
 
-// UpdateO is the output for updating labels.
+message UpdateI_Object_Update {}
+
+// UpdateO is the output for updating policies.
 //
 //     {
 //         "object": [
 //             {
 //                 "intern": {
-//                     "stts": "updated"
+//                     "stts": "started"
 //                 }
 //             }
 //         ]
@@ -76,7 +68,7 @@ message UpdateO_Object {
 }
 
 message UpdateO_Object_Intern {
-  // stts is the resource status upon successful label modification.
+  // stts is the resource status upon successful policy modification.
   string stts = 100;
 }
 

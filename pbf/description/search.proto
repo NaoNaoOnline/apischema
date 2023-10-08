@@ -6,12 +6,12 @@ option go_package = "./;description";
 // SearchI is the input for searching descriptions.
 //
 //     {
-//         "filter": [
-//             "chunking": {
+//         "filter": {
+//             "paging": {
 //                 "perpage": "50",
 //                 "pointer": "100"
 //             }
-//         ],
+//         },
 //         "object": [
 //             {
 //                 "intern": {
@@ -27,10 +27,10 @@ message SearchI {
 }
 
 message SearchI_Filter {
-  SearchI_Filter_Chunking chunking = 100;
+  SearchI_Filter_Paging paging = 100;
 }
 
-message SearchI_Filter_Chunking {
+message SearchI_Filter_Paging {
   string perpage = 100;
   string pointer = 200;
 }
@@ -50,12 +50,12 @@ message SearchI_Object_Public {
 // SearchO is the output for searching descriptions.
 //
 //     {
-//         "filter": [
-//             "chunking": {
-//                 "perpage": "50",
+//         "filter": {
+//             "paging": {
+//                 "intotal": "750",
 //                 "pointer": "150"
 //             }
-//         ],
+//         },
 //         "object": [
 //             {
 //                 "intern": {
@@ -77,7 +77,14 @@ message SearchO {
   repeated SearchO_Object object = 200;
 }
 
-message SearchO_Filter {}
+message SearchO_Filter {
+  SearchO_Filter_Paging paging = 100;
+}
+
+message SearchO_Filter_Paging {
+  string intotal = 100;
+  string pointer = 200;
+}
 
 message SearchO_Object {
   SearchO_Object_Intern intern = 100;

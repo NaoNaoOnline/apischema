@@ -19,12 +19,15 @@ message UpdateI_Filter {}
 message UpdateI_Object {
   UpdateI_Object_Intern intern = 100;
   UpdateI_Object_Public public = 200;
-  repeated UpdateI_Object_Update update = 300;
+  UpdateI_Object_Symbol symbol = 300;
+  repeated UpdateI_Object_Update update = 400;
 }
 
 message UpdateI_Object_Intern {}
 
 message UpdateI_Object_Public {}
+
+message UpdateI_Object_Symbol {}
 
 message UpdateI_Object_Update {}
 

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package policy;
+option go_package = "./;policy";
+
+// DeleteI is the input for deleting policies.
+//
+//     {
+//         "object": []
+//     }
+//
+message DeleteI {
+  DeleteI_Filter filter = 100;
+  repeated DeleteI_Object object = 200;
+}
+
+message DeleteI_Filter {}
+
+message DeleteI_Object {
+  DeleteI_Object_Intern intern = 100;
+  DeleteI_Object_Public public = 200;
+}
+
+message DeleteI_Object_Intern {}
+
+message DeleteI_Object_Public {}
+
+// DeleteO is the output for deleting policies.
+//
+//     {
+//         "object": []
+//     }
+//
+message DeleteO {
+  DeleteO_Filter filter = 100;
+  repeated DeleteO_Object object = 200;
+}
+
+message DeleteO_Filter {}
+
+message DeleteO_Object {
+  DeleteO_Object_Intern intern = 100;
+  DeleteO_Object_Public public = 200;
+}
+
+message DeleteO_Object_Intern {}
+
+message DeleteO_Object_Public {}
