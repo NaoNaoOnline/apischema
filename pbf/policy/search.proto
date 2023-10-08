@@ -47,7 +47,8 @@ message SearchI_Object {
 }
 
 message SearchI_Object_Intern {
-  // kind is the record type for which policies are being searched.
+  // kind is the record type for which policies are being searched. Providing
+  // kind may only be allowed if ltst is set to "raw".
   //
   //     CreateMember for records of members being created within a system
   //     CreateSystem for records of systems being created
@@ -74,7 +75,7 @@ message SearchI_Object_Symbol {
   //
   // ltst set to "raw" returns the complete list of records submitted so far.
   // This raw data is not aggregated, transparently representing the onchain
-  // state of emitted smart contract events.
+  // state of emitted smart contract events currently cached internally.
   //
   // Note that indexing happens periodically in a background process, which can
   // be triggered by policy members to update the cached state on demand using
