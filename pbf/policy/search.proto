@@ -46,7 +46,9 @@ message SearchI_Object {
   SearchI_Object_Symbol symbol = 300;
 }
 
-message SearchI_Object_Intern {
+message SearchI_Object_Intern {}
+
+message SearchI_Object_Public {
   // kind is the record type for which policies are being searched. Providing
   // kind may only be allowed if ltst is set to "proxy".
   //
@@ -57,8 +59,6 @@ message SearchI_Object_Intern {
   //
   string kind = 100;
 }
-
-message SearchI_Object_Public {}
 
 message SearchI_Object_Symbol {
   // ltst set to "default" returns the latest aggregated version of cached
@@ -94,14 +94,15 @@ message SearchI_Object_Symbol {
 //         },
 //         "object": [
 //             {
-//                 "extern": {
-//                     "blck": "18312712",
-//                     "chid": "42161",
-//                     "from": "0x1234",
-//                     "hash": "0x2345",
-//                     "kind": "CreateMember",
-//                     "time": "1689001255"
-//                 },
+//                 "extern": [
+//                     {
+//                         "blck": "18312712",
+//                         "chid": "42161",
+//                         "from": "0x1234",
+//                         "hash": "0x2345",
+//                         "time": "1689001255"
+//                     },
+//                 ],
 //                 "intern": {
 //                     "crtd": "1689001255",
 //                     "plcy": "1128376"
@@ -109,6 +110,7 @@ message SearchI_Object_Symbol {
 //                 "public": {
 //                     "acce": "2",
 //                     "memb": "0x3456",
+//                     "kind": "CreateMember",
 //                     "syst": "0"
 //                 }
 //             },
@@ -131,8 +133,9 @@ message SearchO_Filter_Paging {
 }
 
 message SearchO_Object {
-  SearchO_Object_Intern intern = 100;
-  SearchO_Object_Public public = 200;
+  repeated SearchO_Object_Extern extern = 100;
+  SearchO_Object_Intern intern = 200;
+  SearchO_Object_Public public = 300;
 }
 
 message SearchO_Object_Extern {
@@ -146,20 +149,12 @@ message SearchO_Object_Extern {
   string from = 300;
   // hash is the onchain transaction hash that submitted this record.
   string hash = 400;
-  // kind is the record type.
-  //
-  //     CreateMember for records of members being created within a system
-  //     CreateSystem for records of systems being created
-  //     DeleteMember for records of members being deleted within a system
-  //     DeleteSystem for records of systems being deleted
-  //
-  string kind = 500;
   // time is the unix timestamp in seconds at which the record got created
   // externally. Note that policy records are external data objects that get
   // created somewhere else, in this case onchain, and thus must bring a
   // creation timestamp with them. So the created timestamp here originates from
   // some blockchain network.
-  string time = 600;
+  string time = 500;
 }
 
 message SearchO_Object_Intern {
@@ -175,6 +170,14 @@ message SearchO_Object_Public {
   string acce = 100;
   // memb is the SMA record account, identity or user.
   string memb = 200;
+  // kind is the record type.
+  //
+  //     CreateMember for records of members being created within a system
+  //     CreateSystem for records of systems being created
+  //     DeleteMember for records of members being deleted within a system
+  //     DeleteSystem for records of systems being deleted
+  //
+  string kind = 300;
   // syst is the SMA record context, resource or scope.
-  string syst = 300;
+  string syst = 400;
 }
