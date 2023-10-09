@@ -94,16 +94,20 @@ message SearchI_Object_Symbol {
 //         },
 //         "object": [
 //             {
+//                 "extern": {
+//                     "blck": "18312712",
+//                     "chid": "42161",
+//                     "from": "0x1234",
+//                     "hash": "0x2345",
+//                     "kind": "CreateMember",
+//                     "time": "1689001255"
+//                 },
 //                 "intern": {
 //                     "crtd": "1689001255",
 //                     "plcy": "1128376"
 //                 },
 //                 "public": {
 //                     "acce": "2",
-//                     "chid": "42161",
-//                     "from": "0x1234",
-//                     "hash": "0x2345",
-//                     "kind": "CreateMember",
 //                     "memb": "0x3456",
 //                     "syst": "0"
 //                 }
@@ -131,19 +135,9 @@ message SearchO_Object {
   SearchO_Object_Public public = 200;
 }
 
-message SearchO_Object_Intern {
-  // crtd is the unix timestamp in seconds at which the record got created. Note
-  // that policy records are external data objects that get created somewhere
-  // else and thus must bring a created timestamp with them. So the created
-  // timestamp here originates from some blockchain network.
-  string crtd = 100;
-  // plcy is the ID of the record being searched.
-  string plcy = 200;
-}
-
-message SearchO_Object_Public {
-  // acce is the SMA record level, permission or role.
-  string acce = 100;
+message SearchO_Object_Extern {
+  // blck is the block height at which this record got created.
+  string blck = 100;
   // chid is the chain ID, the unique identifier representing the blockchain
   // network on which this record is located.
   string chid = 200;
@@ -160,8 +154,27 @@ message SearchO_Object_Public {
   //     DeleteSystem for records of systems being deleted
   //
   string kind = 500;
+  // time is the unix timestamp in seconds at which the record got created
+  // externally. Note that policy records are external data objects that get
+  // created somewhere else, in this case onchain, and thus must bring a
+  // creation timestamp with them. So the created timestamp here originates from
+  // some blockchain network.
+  string time = 600;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the record got cached
+  // internally.
+  string crtd = 100;
+  // plcy is the internal ID of the record being searched.
+  string plcy = 200;
+}
+
+message SearchO_Object_Public {
+  // acce is the SMA record level, permission or role.
+  string acce = 100;
   // memb is the SMA record account, identity or user.
-  string memb = 600;
+  string memb = 200;
   // syst is the SMA record context, resource or scope.
-  string syst = 700;
+  string syst = 300;
 }
