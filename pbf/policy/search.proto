@@ -101,7 +101,7 @@ message SearchI_Object_Symbol {
 //                         "from": "0x1234",
 //                         "hash": "0x2345",
 //                         "time": "1689001255"
-//                     },
+//                     }
 //                 ],
 //                 "intern": {
 //                     "crtd": "1689001255",
