@@ -109,8 +109,8 @@ message SearchI_Object_Symbol {
 //                 },
 //                 "public": {
 //                     "acce": "2",
-//                     "memb": "0x3456",
 //                     "kind": "CreateMember",
+//                     "memb": "0x3456",
 //                     "syst": "0"
 //                 }
 //             },
@@ -168,8 +168,6 @@ message SearchO_Object_Intern {
 message SearchO_Object_Public {
   // acce is the SMA record level, permission or role.
   string acce = 100;
-  // memb is the SMA record account, identity or user.
-  string memb = 200;
   // kind is the record type.
   //
   //     CreateMember for records of members being created within a system
@@ -177,7 +175,9 @@ message SearchO_Object_Public {
   //     DeleteMember for records of members being deleted within a system
   //     DeleteSystem for records of systems being deleted
   //
-  string kind = 300;
+  string kind = 200;
+  // memb is the SMA record account, identity or user.
+  string memb = 300;
   // syst is the SMA record context, resource or scope.
   string syst = 400;
 }
