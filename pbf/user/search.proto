@@ -38,19 +38,24 @@ message SearchI_Filter_Paging {
 message SearchI_Object {
   SearchI_Object_Intern intern = 100;
   SearchI_Object_Public public = 200;
+  SearchI_Object_Symbol symbol = 300;
 }
 
 message SearchI_Object_Intern {
-  // user is the ID of the user being searched. If user is left empty, the
-  // current user sending the request is looked up and returned based on the
-  // given authorization parameters. Given an OAuth access token, its encoded
-  // subject claim may refer to the internally persisted user object.
+  // user is the ID of the user being searched.
   string user = 100;
 }
 
 message SearchI_Object_Public {
   // name is the name of the user being searched.
   string name = 100;
+}
+
+message SearchI_Object_Symbol {
+  // user set to "self" returns the current user sending the request, based on
+  // the given authorization parameters. Given an OAuth access token, its
+  // encoded subject claim may refer to the internally persisted user object.
+  string user = 100;
 }
 
 // SearchO is the output for searching users.
