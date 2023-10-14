@@ -105,7 +105,8 @@ message SearchI_Object_Symbol {
 //                 ],
 //                 "intern": {
 //                     "crtd": "1689001255",
-//                     "plcy": "1128376"
+//                     "plcy": "1128376",
+//                     "user": "551265"
 //                 },
 //                 "public": {
 //                     "acce": "2",
@@ -163,6 +164,12 @@ message SearchO_Object_Intern {
   string crtd = 100;
   // plcy is the internal ID of the record being searched.
   string plcy = 200;
+  // user is the user ID matched to this wallet on the fly, if any. We do not
+  // persist the direct relationship between policy and user because of several
+  // synchronization issues. The user ID will be looked up on demand when
+  // searching for polices. It might as well also be that there is no user
+  // association for a policy object intermittently.
+  string user = 300;
 }
 
 message SearchO_Object_Public {
