@@ -94,6 +94,7 @@ message SearchI_Object_Symbol {
 message SearchO {
   SearchO_Filter filter = 100;
   repeated SearchO_Object object = 200;
+  repeated SearchO_Reason reason = 300;
 }
 
 message SearchO_Filter {
@@ -134,4 +135,13 @@ message SearchO_Object_Public {
   string memb = 200;
   // syst is the SMA record context, resource or scope.
   string syst = 300;
+}
+
+message SearchO_Reason {
+  // desc provides some contextual information about decision making logic
+  // inside the API that let to the returned result.
+  string desc = 100;
+  // kind is the human readable type information about the soft error code
+  // provided with associated description.
+  string kind = 200;
 }
