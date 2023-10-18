@@ -141,7 +141,7 @@ message SearchO_Reason {
   // desc provides some contextual information about decision making logic
   // inside the API that let to the returned result.
   string desc = 100;
-  // kind is the human readable type information about the soft error code
-  // provided with associated description.
+  // kind is the human readable type information of the soft error code provided
+  // with associated description.
   string kind = 200;
 }
