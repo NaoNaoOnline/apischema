@@ -7,28 +7,30 @@ languages and remain mostly independent of transport layer specifics.
 
 
 
-### Contexts
+### Query Objects
 
-All APIs allow for multiple action specific contexts, each of which defines a
-certain behaviour. Create APIs allow for multiple create query objects. Search
+All APIs allow for multiple action specific query objects, each of which defines
+a certain behaviour. Create APIs allow for multiple create query objects. Search
 APIs allow for multiple search query objects. Each object represents a context
-defining its own behaviour.
+defining its own behaviour. Some search query objects may yield a union of
+results, so that a multitude of search criteria can be provided in order to
+receive a response containing all merged results.
 
 
 
-##### Intern
+##### Object.Intern
 
-Intern search queries reference internally managed fields of the underlying
-resource objects. The search query below returns the event object associated to
-the specified event ID, which in turn originated from the system at resource
-creation.
+`Object.Intern` search queries reference internally managed fields of the
+underlying resource objects. The search query below returns the event object
+associated to the specified event ID, which in turn originated from the system
+at resource creation.
 
 ```json
 {
     "object": [
         {
             "intern": {
-              "evnt": "123"
+                "evnt": "1234"
             },
             "public": {},
             "symbol": {}
@@ -39,12 +41,12 @@ creation.
 
 
 
-##### Public
+##### Object.Public
 
-Public search queries reference publicly provided fields of the underlying
-resource objects. The search query below returns a list of event objects
-associated to the specified label IDs, which were added to the event by the user
-upon resource creation.
+`Object.Public` search queries reference publicly provided fields of the
+underlying resource objects. The search query below returns a list of event
+objects associated to the specified label IDs, which were added to the event by
+the user upon resource creation.
 
 ```json
 {
@@ -52,8 +54,8 @@ upon resource creation.
         {
             "intern": {},
             "public": {
-              "cate": "456",
-              "host": "789",
+                "cate": "4567",
+                "host": "6789"
             },
             "symbol": {}
         }
@@ -63,9 +65,9 @@ upon resource creation.
 
 
 
-##### Symbol
+##### Object.Symbol
 
-Symbol search queries execute arbitrary logic to return resource objects
+`Object.Symbol` search queries execute arbitrary logic to return resource objects
 matching certain use case requirements. The search query below resolves to the
 list of events the calling user reacted to in the past.
 
@@ -76,7 +78,7 @@ list of events the calling user reacted to in the past.
             "intern": {},
             "public": {},
             "symbol": {
-              "rctn": "default"
+                "rctn": "default"
             }
         }
     ]
@@ -85,10 +87,31 @@ list of events the calling user reacted to in the past.
 
 
 
-### Formatting
+##### Response.Reason
 
-```bash
-clang-format -i $(find ./pbf -name "*.proto")
+`Response.Reason` provides the caller with a possible explanation for the
+returned result. Every API may implement specific behaviour to manage the
+resources it is responsible for. Such behaviour may imply authentication,
+authorization or other preconditions that the caller must comply with. Since not
+all API behaviour warrants an implicit error response that expresses failure, a
+list of reasons for the returned result may be presented in order to inform
+about the logical decisions an API had to make when serving the callers request
+as presented. We may refer to these reasons as soft errors. They are errors, but
+not really. They imply an error condition occurred which is expected to happen
+for some users of the system. Then, instead of failing strictly with an error
+response, the returned result may simply be empty, accompanied with an
+additional explanation of why that is the case.
+
+```json
+{
+    "object": [],
+    "reason": [
+        {
+            "desc": "This is why the soft error occurred.",
+            "kind": "someSoftError"
+        }
+    ]
+}
 ```
 
 
@@ -104,18 +127,6 @@ operations.
 - https://datatracker.ietf.org/doc/html/rfc6902
 - https://jsonpatch.com
 - https://github.com/evanphx/json-patch
-- https://github.com/Starcounter-Jack/JSON-Patch
-
-
-
-### Operators
-
-Filter operators we may support per resource are defined as follows.
-
-- `bet` expresses that only numerical properties within the given range must
-  match when returning requested data objects
-- `not` expresses that no given property must be represented when returning
-  requested data objects
 
 
 
@@ -156,4 +167,23 @@ data objects.
         {}
     ]
 }
+```
+
+
+
+### Operators
+
+Filter operators we may support per resource are defined as follows.
+
+- `bet` expresses that only numerical properties within the given range must
+  match when returning requested data objects
+- `not` expresses that no given property must be represented when returning
+  requested data objects
+
+
+
+### Formatting
+
+```bash
+clang-format -i $(find ./pbf -name "*.proto")
 ```
