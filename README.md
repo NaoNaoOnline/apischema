@@ -55,7 +55,7 @@ the user upon resource creation.
             "intern": {},
             "public": {
                 "cate": "4567",
-                "host": "6789",
+                "host": "6789"
             },
             "symbol": {}
         }
