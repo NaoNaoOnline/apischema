@@ -1,0 +1,108 @@
+syntax = "proto3";
+
+package list;
+option go_package = "./;list";
+
+// SearchI is the input for searching lists. Note that search queries for lists
+// must be authenticated. Also note that search queries for lists are scoped to
+// the calling user. That is, the caller can only ever search for their own
+// lists.
+//
+//     {
+//         "filter": {
+//             "paging": {
+//                 "perpage": "50",
+//                 "pointer": "100"
+//             }
+//         },
+//         "object": [
+//             {
+//                 "intern": {
+//                     "user": "551265"
+//                 }
+//             }
+//         ]
+//     }
+//
+message SearchI {
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
+}
+
+message SearchI_Filter {
+  SearchI_Filter_Paging paging = 100;
+}
+
+message SearchI_Filter_Paging {
+  string perpage = 100;
+  string pointer = 200;
+}
+
+message SearchI_Object {
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {
+  // user is the ID of the user who created this list.
+  string user = 100;
+}
+
+message SearchI_Object_Public {}
+
+// SearchO is the output for searching lists.
+//
+//     {
+//         "filter": {
+//             "paging": {
+//                 "intotal": "750",
+//                 "pointer": "150"
+//             }
+//         },
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "list": "986763351"
+//                     "user": "551265"
+//                 },
+//                 "public": {
+//                     "desc": "where CT personalities meet"
+//                 }
+//             },
+//             ...
+//         ]
+//     }
+//
+message SearchO {
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
+}
+
+message SearchO_Filter {
+  SearchO_Filter_Paging paging = 100;
+}
+
+message SearchO_Filter_Paging {
+  string intotal = 100;
+  string pointer = 200;
+}
+
+message SearchO_Object {
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the list got created.
+  string crtd = 100;
+  // list is the ID of the list being searched.
+  string list = 200;
+  // user is the ID of the user who created this list.
+  string user = 300;
+}
+
+message SearchO_Object_Public {
+  // desc is the list's description.
+  string desc = 100;
+}

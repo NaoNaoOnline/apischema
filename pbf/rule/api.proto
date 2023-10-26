@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rule;
+option go_package = "./;rule";
+
+import "pbf/rule/create.proto";
+import "pbf/rule/delete.proto";
+import "pbf/rule/search.proto";
+import "pbf/rule/update.proto";
+
+service API {
+  rpc Create(CreateI) returns (CreateO) {}
+  rpc Delete(DeleteI) returns (DeleteO) {}
+  rpc Search(SearchI) returns (SearchO) {}
+  rpc Update(UpdateI) returns (UpdateO) {}
+}

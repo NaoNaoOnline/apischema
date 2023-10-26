@@ -11,7 +11,7 @@ option go_package = "./;event";
 //                 "public": {
 //                     "cate": "863826",
 //                     "dura": "3600",
-//                     "host": "551265",
+//                     "host": "233923",
 //                     "link": "https://google.com",
 //                     "time": "1689001255"
 //                 }
