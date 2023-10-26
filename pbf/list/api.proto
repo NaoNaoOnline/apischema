@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package list;
+option go_package = "./;list";
+
+import "pbf/list/create.proto";
+import "pbf/list/delete.proto";
+import "pbf/list/search.proto";
+import "pbf/list/update.proto";
+
+service API {
+  rpc Create(CreateI) returns (CreateO) {}
+  rpc Delete(DeleteI) returns (DeleteO) {}
+  rpc Search(SearchI) returns (SearchO) {}
+  rpc Update(UpdateI) returns (UpdateO) {}
+}

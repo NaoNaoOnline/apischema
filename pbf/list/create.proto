@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package list;
+option go_package = "./;list";
+
+// CreateI is the input for creating lists. Note that create queries for lists
+// must be authenticated. Also note that create queries for lists are scoped to
+// the calling user. That is, the caller can only ever create lists for
+// themselves.
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "desc": "where CT personalities meet"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateI {
+  CreateI_Filter filter = 100;
+  repeated CreateI_Object object = 200;
+}
+
+message CreateI_Filter {}
+
+message CreateI_Object {
+  CreateI_Object_Intern intern = 100;
+  CreateI_Object_Public public = 200;
+}
+
+message CreateI_Object_Intern {}
+
+message CreateI_Object_Public {
+  // desc is the list's description.
+  string desc = 100;
+}
+
+// CreateO is the output for creating lists.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "list": "986763351"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateO {
+  CreateO_Filter filter = 100;
+  repeated CreateO_Object object = 200;
+}
+
+message CreateO_Filter {}
+
+message CreateO_Object {
+  CreateO_Object_Intern intern = 100;
+  CreateO_Object_Public public = 200;
+}
+
+message CreateO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the list got created.
+  string crtd = 100;
+  // list is the ID of the list being created.
+  string list = 200;
+}
+
+message CreateO_Object_Public {}

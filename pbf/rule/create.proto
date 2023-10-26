@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package rule;
+option go_package = "./;rule";
+
+// CreateI is the input for creating rules. Note that create queries for rules
+// must be authenticated. Also note that create queries for rules are scoped to
+// the calling user. That is, the caller can only ever create rules for
+// themselves by providing an associated list ID for a list that the caller owns
+// as well.
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "incl": "863826",
+//                     "kind": "host",
+//                     "list": "986763351"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateI {
+  CreateI_Filter filter = 100;
+  repeated CreateI_Object object = 200;
+}
+
+message CreateI_Filter {}
+
+message CreateI_Object {
+  CreateI_Object_Intern intern = 100;
+  CreateI_Object_Public public = 200;
+}
+
+message CreateI_Object_Intern {}
+
+message CreateI_Object_Public {
+  // excl is the rule's object ID to remove from the associated list, if any.
+  string excl = 100;
+  // incl is the rule's object ID to add to the associated list, if any.
+  string incl = 200;
+  // kind is the rule's object type defining the resource for included and
+  // excluded object IDs. kind set to "host" includes and excludes the
+  // respective host label IDs when computing the associated list.
+  //
+  //     cate for adding or removing events matching the given category IDs
+  //     host for adding or removing events matching the given host IDs
+  //     user for adding or removing events created by the given user IDs
+  //
+  string kind = 300;
+  // list is the list ID this rule is mapped to.
+  string list = 400;
+}
+
+// CreateO is the output for creating rules.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "rule": "21371336"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateO {
+  CreateO_Filter filter = 100;
+  repeated CreateO_Object object = 200;
+}
+
+message CreateO_Filter {}
+
+message CreateO_Object {
+  CreateO_Object_Intern intern = 100;
+  CreateO_Object_Public public = 200;
+}
+
+message CreateO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the rule got created.
+  string crtd = 100;
+  // rule is the ID of the rule being created.
+  string rule = 200;
+}
+
+message CreateO_Object_Public {}
