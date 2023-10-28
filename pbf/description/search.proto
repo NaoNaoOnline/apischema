@@ -92,7 +92,7 @@ message SearchO_Object_Extern {
   string amnt = 100;
   // kind is the type of reaction this reaction received.
   //
-  //     clck for users liking the description of an event
+  //     like for users liking the description of an event
   //
   string kind = 200;
   // user expresses whether the calling user reacted to this description with

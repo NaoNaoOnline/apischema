@@ -44,7 +44,7 @@ message UpdateI_Object_Intern {
 message UpdateI_Object_Public {}
 
 message UpdateI_Object_Symbol {
-  // xtrn set to "clck" indexes a new reaction for the given description,
+  // xtrn set to "like" indexes a new reaction for the given description,
   // tracking the description like for the calling user.
   string xtrn = 100;
 }
