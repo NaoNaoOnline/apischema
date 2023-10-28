@@ -90,7 +90,7 @@ message SearchO_Object_Extern {
   // amnt is the number of reactions this description received for the specified
   // kind.
   string amnt = 100;
-  // kind is the type of reaction this reaction received.
+  // kind is the type of reaction this description received.
   //
   //     like for users liking the description of an event
   //
