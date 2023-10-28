@@ -8,8 +8,8 @@ option go_package = "./;policy";
 //     {
 //         "filter": {
 //             "paging": {
-//                 "perpage": "50",
-//                 "pointer": "100"
+//                 "strt": "0",
+//                 "stop": "49"
 //             }
 //         },
 //         "object": [
@@ -36,8 +36,8 @@ message SearchI_Filter {
 }
 
 message SearchI_Filter_Paging {
-  string perpage = 100;
-  string pointer = 200;
+  string strt = 100;
+  string stop = 200;
 }
 
 message SearchI_Object {
@@ -65,12 +65,6 @@ message SearchI_Object_Symbol {
 // SearchO is the output for searching policies.
 //
 //     {
-//         "filter": {
-//             "paging": {
-//                 "intotal": "750",
-//                 "pointer": "150"
-//             }
-//         },
 //         "object": [
 //             {
 //                 "extern": [
@@ -97,14 +91,7 @@ message SearchO {
   repeated SearchO_Reason reason = 300;
 }
 
-message SearchO_Filter {
-  SearchO_Filter_Paging paging = 100;
-}
-
-message SearchO_Filter_Paging {
-  string intotal = 100;
-  string pointer = 200;
-}
+message SearchO_Filter {}
 
 message SearchO_Object {
   repeated SearchO_Object_Extern extern = 100;

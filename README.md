@@ -132,42 +132,43 @@ operations.
 
 ### Pagination
 
-Pagination is not yet supported, though the specification for splitting up
-responses of larger results would work as follows. In the request example below
-the response would contain the first batch of 100 items. Consecutive calls would
-require the pointer returned with the preceding response in order to continue
-fetching the next batches accordingly.
+Pagination works by providing paging pointers for search query objects. The
+pointers  `strt` and `stop` are always **inclusive**. In the request example
+below the response would contain the first batch of 50 items. Depending on the
+requested resources, consecutive calls with the exact same pointers may not
+result in the same objects received, given the dynamic nature of the underlying
+system.
 
 ```json
 {
     "filter": {
         "paging": {
-            "perpage": "50",
-            "pointer": "100"
+            "strt": "0",
+            "stop": "49"
         }
     }
 }
 ```
 
-With pagination the response would as well contain `filter.paging`. When
-receiving search responses there will always be the `result` list of requested
-data objects.
+Providing paging pointers in requests containing multiple search query objects
+causes the system to apply paging to each search query result. Consider
+resources to be searched from two lists using two search query objects. Say the
+lists look like [A B C D] and [E F G H]. Searching for both results from both
+lists in a single call using strt=0 and stop=1 would return [A B] and [E F]. If
+paging is desired for large lists of objects, single search query objects may be
+more applicable, depending on the use case.
 
-```json
-{
-    "filter": {
-        "paging": {
-            "intotal": "750",
-            "pointer": "150"
-        }
-    },
-    "result": [
-        {},
-        {},
-        {}
-    ]
-}
-```
+Note that the paging pointers may refer to the absolute number of objects
+received, or other indexing parameters, like unix timestamps, depending on the
+API implementation and use case. Searching for objects constrained to a
+particular hour in time may be done by defining strt=1672531200 and
+stop=1672534800. Paging pointers defining absolute numbers may result in less
+received objects than requested, but never more. Paging pointers defining other
+indexing parameters, like unix timestamps, may result in indeterministic amounts
+of received objects.
+
+Further note that the hard cap of returned objects is 1000. No more than 1000
+objects can be received from a single call.
 
 
 
