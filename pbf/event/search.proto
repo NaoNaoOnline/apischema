@@ -86,7 +86,7 @@ message SearchI_Object_Symbol {
   // user's reactions. That is, the list of events that the calling user reacted
   // to in the past. Neither the amount nor the kind of reactions to any event
   // matter. If the calling user reacted to an event, it will be returned here.
-  // Paging is available by providing absolute numbers as pointers of the
+  // Paging is available by providing absolute numbers as pointers for the
   // underyling ordered objects.
   string rctn = 300;
 }
