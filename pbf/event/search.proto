@@ -143,7 +143,7 @@ message SearchO_Object_Extern {
   string kind = 200;
   // user expresses whether the calling user reacted to this event with the
   // specified reaction kind.
-  string user = 300;
+  bool user = 300;
 }
 
 message SearchO_Object_Intern {

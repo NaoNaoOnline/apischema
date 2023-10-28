@@ -45,7 +45,8 @@ message UpdateI_Object_Public {}
 
 message UpdateI_Object_Symbol {
   // xtrn set to "like" indexes a new reaction for the given description,
-  // tracking the description like for the calling user.
+  // tracking the description like for the calling user. xtern set to "ulik"
+  // removes a user like for the given description, if one existed.
   string xtrn = 100;
 }
 
