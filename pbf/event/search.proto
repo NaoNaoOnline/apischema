@@ -8,8 +8,8 @@ option go_package = "./;event";
 //     {
 //         "filter": {
 //             "paging": {
-//                 "perpage": "50",
-//                 "pointer": "100"
+//                 "strt": "0",
+//                 "stop": "49"
 //             }
 //         },
 //         "object": [
@@ -31,8 +31,8 @@ message SearchI_Filter {
 }
 
 message SearchI_Filter_Paging {
-  string perpage = 100;
-  string pointer = 200;
+  string strt = 100;
+  string stop = 200;
 }
 
 message SearchI_Object {
@@ -70,30 +70,30 @@ message SearchI_Object_Public {
 
 message SearchI_Object_Symbol {
   // list set to any valid list ID returns all of the event objects matching the
-  // provided list's criteria.
+  // provided list's criteria. Paging is available by providing absolute numbers
+  // as pointers of the underyling ordered objects.
   string list = 100;
   // ltst set to "default" returns the latest event objects indexed by event
   // start time. That is, the list of events that are going on right now,
   // including events that already happened, and events that will happen in the
-  // near future. The time horizon of the search query is limited to one week in
-  // the past and one week in the future.
+  // near future. The time horizon of the "default" search query is limited to
+  // one week in the past and one week in the future. Paging is available by
+  // providing unix timestamps as pointers of the underyling ordered objects,
+  // where the unix timestamps refer to the start time of the respective events,
+  // that is, when they are happening.
   string ltst = 200;
   // rctn set to "default" returns the event objects indexed by the calling
   // user's reactions. That is, the list of events that the calling user reacted
   // to in the past. Neither the amount nor the kind of reactions to any event
   // matter. If the calling user reacted to an event, it will be returned here.
+  // Paging is available by providing absolute numbers as pointers of the
+  // underyling ordered objects.
   string rctn = 300;
 }
 
 // SearchO is the output for searching events.
 //
 //     {
-//         "filter": {
-//             "paging": {
-//                 "intotal": "750",
-//                 "pointer": "150"
-//             }
-//         },
 //         "object": [
 //             {
 //                 "intern": {
@@ -118,14 +118,7 @@ message SearchO {
   repeated SearchO_Object object = 200;
 }
 
-message SearchO_Filter {
-  SearchO_Filter_Paging paging = 100;
-}
-
-message SearchO_Filter_Paging {
-  string intotal = 100;
-  string pointer = 200;
-}
+message SearchO_Filter {}
 
 message SearchO_Object {
   SearchO_Object_Intern intern = 100;
