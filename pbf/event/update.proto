@@ -43,7 +43,11 @@ message UpdateI_Object_Intern {
 
 message UpdateI_Object_Public {}
 
-message UpdateI_Object_Symbol {}
+message UpdateI_Object_Symbol {
+  // xtrn set to "clck" indexes a new reaction for the given event, tracking the
+  // event link click for the calling user.
+  string xtrn = 100;
+}
 
 message UpdateI_Object_Update {
   string ope = 100;

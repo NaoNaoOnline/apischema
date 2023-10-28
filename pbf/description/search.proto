@@ -52,6 +52,13 @@ message SearchI_Object_Public {
 //     {
 //         "object": [
 //             {
+//                 "extern": [
+//                     {
+//                         "amnt": "1047",
+//                         "kind": "like",
+//                         "user": true
+//                     }
+//                 ],
 //                 "intern": {
 //                     "crtd": "1689001255",
 //                     "desc": "98972893",
@@ -74,8 +81,23 @@ message SearchO {
 message SearchO_Filter {}
 
 message SearchO_Object {
-  SearchO_Object_Intern intern = 100;
-  SearchO_Object_Public public = 200;
+  repeated SearchO_Object_Extern extern = 100;
+  SearchO_Object_Intern intern = 200;
+  SearchO_Object_Public public = 300;
+}
+
+message SearchO_Object_Extern {
+  // amnt is the number of reactions this description received for the specified
+  // kind.
+  string amnt = 100;
+  // kind is the type of reaction this reaction received.
+  //
+  //     clck for users liking the description of an event
+  //
+  string kind = 200;
+  // user expresses whether the calling user reacted to this description with
+  // the specified reaction kind.
+  string user = 300;
 }
 
 message SearchO_Object_Intern {
