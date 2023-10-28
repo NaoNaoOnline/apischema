@@ -78,7 +78,7 @@ message SearchI_Object_Symbol {
   // including events that already happened, and events that will happen in the
   // near future. The time horizon of the "default" search query is limited to
   // one week in the past and one week in the future. Paging is available by
-  // providing unix timestamps as pointers of the underyling ordered objects,
+  // providing unix timestamps as pointers for the underyling ordered objects,
   // where the unix timestamps refer to the start time of the respective events,
   // that is, when they are happening.
   string ltst = 200;
