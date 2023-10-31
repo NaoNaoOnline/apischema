@@ -73,22 +73,31 @@ message SearchI_Object_Symbol {
   // provided list's criteria. Paging is available by providing absolute numbers
   // as pointers for the underyling ordered objects.
   string list = 100;
-  // ltst set to "default" returns the latest event objects indexed by event
-  // start time. That is, the list of events that are going on right now,
-  // including events that already happened, and events that will happen in the
-  // near future. The time horizon of the "default" search query is limited to
-  // one week in the past and one week in the future. Paging is available by
-  // providing unix timestamps as pointers for the underyling ordered objects,
-  // where the unix timestamps refer to the start time of the respective events,
-  // that is, when they are happening.
-  string ltst = 200;
   // rctn set to "default" returns the event objects indexed by the calling
   // user's reactions. That is, the list of events that the calling user reacted
   // to in the past. Neither the amount nor the kind of reactions to any event
   // matter. If the calling user reacted to an event, it will be returned here.
   // Paging is available by providing absolute numbers as pointers for the
   // underyling ordered objects.
-  string rctn = 300;
+  string rctn = 200;
+  // time set to a valid symbol or a unix time range returns the list of events
+  // known to happen within the specified boundaries. Note that the default
+  // event retention for past events is one week. The premium subscriber event
+  // retention for past events is three months.
+  //
+  //     time set to "hpnd" returns the list of events known to have already
+  //     happened within the past week.
+  //
+  //     time set to "ltst" returns the list of events known to happen within
+  //     the next week.
+  //
+  //     time set to "unix,unix" returns the list of events known to happen, or
+  //     have happened, within the specified boundaries. The first paging
+  //     pointer here is the unix timestamp in seconds of the lower boundary,
+  //     read min. The second paging pointer here is the unix timestamp in
+  //     seconds of the upper boundary, read max.
+  //
+  string time = 300;
 }
 
 // SearchO is the output for searching events.
