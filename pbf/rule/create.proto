@@ -46,6 +46,7 @@ message CreateI_Object_Public {
   //
   //     cate for adding or removing events matching the given category IDs
   //     host for adding or removing events matching the given host IDs
+  //     like for adding or removing events liked by the given user IDs
   //     user for adding or removing events created by the given user IDs
   //
   string kind = 300;
