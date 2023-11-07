@@ -14,7 +14,7 @@ option go_package = "./;label";
 //                 "update": [
 //                     {
 //                         "ope": "replace",
-//                         "pat": "/obj/property/name",
+//                         "pat": "/name",
 //                         "val": "flashbots"
 //                     }
 //                 ]
