@@ -58,7 +58,7 @@ message UpdateI_Object_Update {}
 //             {
 //                 "intern": {
 //                     "stts": "started"
-//                 }
+//                 },
 //                 "symbol": {
 //                     "pntr": "1689001255"
 //                 }
