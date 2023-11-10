@@ -101,6 +101,7 @@ message SearchO_Object_Public {
   // respective host label IDs when computing the associated list.
   //
   //     cate for adding or removing events matching the given category IDs
+  //     evnt for adding or removing events matching the given event IDs
   //     host for adding or removing events matching the given host IDs
   //     like for adding or removing events liked by the given user IDs
   //     user for adding or removing events created by the given user IDs
