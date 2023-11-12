@@ -40,7 +40,12 @@ message SearchI_Object {
   SearchI_Object_Public public = 200;
 }
 
-message SearchI_Object_Intern {}
+message SearchI_Object_Intern {
+  // user is the ID of the user having created the descriptions being searched.
+  // If searching for descriptions created by a particular user, the search
+  // query object must not contain any other fields.
+  string user = 100;
+}
 
 message SearchI_Object_Public {
   // evnt is the event ID for which descriptions are being searched.
