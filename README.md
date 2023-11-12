@@ -67,9 +67,9 @@ the user upon resource creation.
 
 ##### Object.Symbol
 
-`Object.Symbol` search queries execute arbitrary logic to return resource objects
-matching certain use case requirements. The search query below resolves to the
-list of events the calling user reacted to in the past.
+`Object.Symbol` search queries execute arbitrary logic to return resource
+objects matching certain use case requirements. The search query below resolves
+to the list of events the provided user ID liked in the past.
 
 ```json
 {
@@ -78,7 +78,7 @@ list of events the calling user reacted to in the past.
             "intern": {},
             "public": {},
             "symbol": {
-                "rctn": "default"
+                "like": "551265"
             }
         }
     ]
