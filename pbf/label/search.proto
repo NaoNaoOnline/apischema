@@ -43,6 +43,10 @@ message SearchI_Object {
 message SearchI_Object_Intern {
   // labl is the ID of the label being searched.
   string labl = 100;
+  // user is the ID of the user having created the labels being searched. If
+  // searching for labels created by a particular user, the search query object
+  // must not contain any other fields.
+  string user = 200;
 }
 
 message SearchI_Object_Public {
