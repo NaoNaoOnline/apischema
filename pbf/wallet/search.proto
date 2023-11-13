@@ -100,7 +100,7 @@ message SearchO_Object_Intern {
   // crtd is the unix timestamp in seconds at which the wallet got created.
   string crtd = 200;
   // labl contains lifecycle metadata for this wallet object.
-  UpdateO_Object_Intern_Labl labl = 300;
+  SearchO_Object_Intern_Labl labl = 300;
   // user is the ID of the user who created this wallet.
   string user = 400;
   // wllt is the ID of the wallet being searched.
@@ -113,7 +113,7 @@ message SearchO_Object_Intern_Addr {
   string time = 100;
 }
 
-message UpdateO_Object_Intern_Labl {
+message SearchO_Object_Intern_Labl {
   // Time is the unix timestamp in seconds of the most recent time at which the
   // wallet label got updated.
   string time = 100;
