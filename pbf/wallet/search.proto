@@ -66,12 +66,16 @@ message SearchI_Object_Public {
 //                         "time": "1695326765"
 //                     },
 //                     "crtd": "1689001255",
+//                     "labl": {
+//                         "time": "1695326765"
+//                     },
 //                     "user": "551265",
 //                     "wllt": "338912367"
 //                 },
 //                 "public": {
 //                     "addr": "0x0001",
-//                     "kind": "eth"
+//                     "kind": "eth",
+//                     "labl": "accounting"
 //                 }
 //             },
 //             ...
@@ -95,15 +99,23 @@ message SearchO_Object_Intern {
   SearchO_Object_Intern_Addr addr = 100;
   // crtd is the unix timestamp in seconds at which the wallet got created.
   string crtd = 200;
+  // labl contains lifecycle metadata for this wallet object.
+  SearchO_Object_Intern_Labl labl = 300;
   // user is the ID of the user who created this wallet.
-  string user = 300;
+  string user = 400;
   // wllt is the ID of the wallet being searched.
-  string wllt = 400;
+  string wllt = 500;
 }
 
 message SearchO_Object_Intern_Addr {
   // Time is the unix timestamp in seconds of the most recent time at which this
   // wallet got re-validated by signing a message again.
+  string time = 100;
+}
+
+message SearchO_Object_Intern_Labl {
+  // Time is the unix timestamp in seconds of the most recent time at which the
+  // wallet label got updated.
   string time = 100;
 }
 
@@ -116,4 +128,11 @@ message SearchO_Object_Public {
   //     eth for ethereum wallets
   //
   string kind = 200;
+  // labl is the designated purpose this wallet serves. Kept empty at the time
+  // of creation. Can be set after the signature verification challenge.
+  //
+  //     accounting for revenue sharing
+  //     moderation for content moderation
+  //
+  string labl = 300;
 }
