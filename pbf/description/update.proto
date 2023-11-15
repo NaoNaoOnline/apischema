@@ -14,7 +14,7 @@ option go_package = "./;description";
 //                 "update": [
 //                     {
 //                         "ope": "replace",
-//                         "pat": "/text",
+//                         "pat": "/text/data",
 //                         "val": "In this Hackathon we build a rocket ship!"
 //                     }
 //                 ]
@@ -51,9 +51,10 @@ message UpdateI_Object_Symbol {
 }
 
 message UpdateI_Object_Update {
-  string ope = 100;
-  string pat = 200;
-  optional string val = 300;
+  optional string frm = 100;
+  string ope = 200;
+  string pat = 300;
+  optional string val = 400;
 }
 
 // UpdateO is the output for updating descriptions.

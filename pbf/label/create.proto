@@ -9,11 +9,8 @@ option go_package = "./;label";
 //         "object": [
 //             {
 //                 "public": {
-//                     "desc": "Flashbots researches implications of MEV",
-//                     "disc": "https://discord.gg/Flashbots",
 //                     "kind": "host",
-//                     "name": "Flashbots",
-//                     "twit": "https://twitter.com/Flashbots"
+//                     "name": "Flashbots"
 //                 }
 //             }
 //         ]
@@ -34,20 +31,14 @@ message CreateI_Object {
 message CreateI_Object_Intern {}
 
 message CreateI_Object_Public {
-  // desc is the label's description.
-  string desc = 100;
-  // disc is the label's Discord link.
-  string disc = 200;
   // kind is the label type for which the label is being created.
   //
   //     cate for category labels
   //     host for host labels
   //
-  string kind = 300;
+  string kind = 100;
   // name is the label name.
-  string name = 400;
-  // twit is the label's Twitter link.
-  string twit = 500;
+  string name = 200;
 }
 
 // CreateO is the output for creating labels.

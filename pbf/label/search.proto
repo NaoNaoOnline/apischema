@@ -71,10 +71,12 @@ message SearchI_Object_Public {
 //                 },
 //                 "public": {
 //                     "desc": "Flashbots researches implications of MEV",
-//                     "disc": "https://discord.gg/Flashbots",
 //                     "kind": "host",
 //                     "name": "Flashbots",
-//                     "twit": "https://twitter.com/Flashbots"
+//                     "prfl": {
+//                         "Twitter": "FlashbotsFDN",
+//                         "Warpcast": "flashbots"
+//                     }
 //                 }
 //             },
 //             ...
@@ -105,17 +107,17 @@ message SearchO_Object_Intern {
 message SearchO_Object_Public {
   // desc is the label's description.
   string desc = 100;
-  // disc is the label's Discord link.
-  string disc = 200;
   // kind is the label type.
   //
   //     bltn for system labels
   //     cate for category labels
   //     host for host labels
   //
-  string kind = 300;
+  string kind = 200;
   // name is the label name.
-  string name = 400;
-  // twit is the label's Twitter link.
-  string twit = 500;
+  string name = 300;
+  // prfl is the map of external accounts related to this label. These accounts
+  // may point to references about this label or to the label owner on other
+  // platforms.
+  map<string, string> prfl = 400;
 }
