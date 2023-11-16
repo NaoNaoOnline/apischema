@@ -57,6 +57,8 @@ message SearchI_Object_Public {
   //     host for host labels
   //
   string kind = 100;
+  // name is the label name to search for.
+  string name = 200;
 }
 
 // SearchO is the output for searching labels.
