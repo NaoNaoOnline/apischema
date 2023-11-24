@@ -1,0 +1,117 @@
+syntax = "proto3";
+
+package subscription;
+option go_package = "./;subscription";
+
+// SearchI is the input for searching subscriptions. Note that search queries
+// for subscriptions must be authenticated. Also note that search queries for
+// subscriptions are scoped to the calling user. That is, the caller can only
+// ever search for their own subscriptions.
+//
+//     {
+//         "filter": {
+//             "paging": {
+//                 "strt": "0",
+//                 "stop": "49"
+//             }
+//         },
+//         "object": [
+//             {
+//                 "intern": {
+//                     "subs": "98762362635"
+//                 }
+//             }
+//         ]
+//     }
+//
+message SearchI {
+  SearchI_Filter filter = 100;
+  repeated SearchI_Object object = 200;
+}
+
+message SearchI_Filter {
+  SearchI_Filter_Paging paging = 100;
+}
+
+message SearchI_Filter_Paging {
+  string strt = 100;
+  string stop = 200;
+}
+
+message SearchI_Object {
+  SearchI_Object_Intern intern = 100;
+  SearchI_Object_Public public = 200;
+}
+
+message SearchI_Object_Intern {
+  // subs is the ID of the subscription being searched.
+  string subs = 100;
+  // user is the ID of the user having registered the subscription being
+  // searched. The user IDs here should refer to the users who paid for
+  // subscriptions.
+  string user = 200;
+}
+
+message SearchI_Object_Public {
+  // sbsc is the wallet address of the user getting access to premium features.
+  // The wallet addresses here should refer to the users who enjoy premium
+  // subscriptions.
+  string sbsc = 100;
+}
+
+// SearchO is the output for searching subscriptions.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "subs": "98762362635",
+//                     "user": "551265"
+//                 },
+//                 "public": {
+//                     "crtr": "0x2345",
+//                     "sbsc": "0x1234",
+//                     "unix": "1698793200"
+//                 }
+//             },
+//             ...
+//         ]
+//     }
+//
+message SearchO {
+  SearchO_Filter filter = 100;
+  repeated SearchO_Object object = 200;
+}
+
+message SearchO_Filter {}
+
+message SearchO_Object {
+  SearchO_Object_Intern intern = 100;
+  SearchO_Object_Public public = 200;
+}
+
+message SearchO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the subscription got
+  // registered.
+  string crtd = 100;
+  // subs is the ID of the subscription being searched.
+  string subs = 200;
+  // user is the ID of the user who registered this subscription.
+  string user = 300;
+}
+
+message SearchO_Object_Public {
+  // crtr is the wallet address of a content creator designated for the purpose
+  // of accounting. These are the addresses getting paid peer-to-peer by users
+  // subscribing for accessing premium features.
+  string crtr = 100;
+  // sbsc is the wallet address of the user getting access to premium features
+  // upon asynchronous subscription verification.
+  string sbsc = 200;
+  // unix is the timestamp of the subscription period. This timestamp must be
+  // represented in unix seconds, that is in UTC, pointing to the start of any
+  // given month. For instance, 1698793200 is Wed Nov 01 2023 00:00:00 UTC,
+  // which would subscribe for the whole month of November 2023.
+  string unix = 300;
+}

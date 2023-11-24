@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package subscription;
+option go_package = "./;subscription";
+
+import "pbf/subscription/create.proto";
+import "pbf/subscription/delete.proto";
+import "pbf/subscription/search.proto";
+import "pbf/subscription/update.proto";
+
+service API {
+  rpc Create(CreateI) returns (CreateO) {}
+  rpc Delete(DeleteI) returns (DeleteO) {}
+  rpc Search(SearchI) returns (SearchO) {}
+  rpc Update(UpdateI) returns (UpdateO) {}
+}
