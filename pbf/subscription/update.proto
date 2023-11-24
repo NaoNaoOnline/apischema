@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+package subscription;
+option go_package = "./;subscription";
+
+// UpdateI is the input for synchronizing subscription state between onchain and
+// offchain. Note that update queries for subscriptions must be authenticated.
+//
+//     {
+//         "object": [
+//             {
+//                 "symbol": {
+//                     "sync": "default"
+//                 }
+//             }
+//         ]
+//     }
+//
+message UpdateI {
+  UpdateI_Filter filter = 100;
+  repeated UpdateI_Object object = 200;
+}
+
+message UpdateI_Filter {}
+
+message UpdateI_Object {
+  UpdateI_Object_Intern intern = 100;
+  UpdateI_Object_Public public = 200;
+  UpdateI_Object_Symbol symbol = 300;
+  repeated UpdateI_Object_Update update = 400;
+}
+
+message UpdateI_Object_Intern {}
+
+message UpdateI_Object_Public {}
+
+message UpdateI_Object_Symbol {
+  // pntr must be left empty when initiating a new update lifecycle with sync
+  // set to "default". As shown below, the update response contains a pointer
+  // that can be provided in a delayed consecutive call, again with sync set to
+  // "default". As long as the provided pointer equals the internally tracked
+  // value, the background process to synchronize onchain and offchain state is
+  // still in progress. Once the internal pointer differs from the provided pntr
+  // value here, the status "updated" will be returned.
+  string pntr = 100;
+  // sync set to "default" starts a background process to synchronize onchain
+  // and offchain state. That way the current state can be fetched on demand by
+  // premium subscribers in case the subscription flow failed intermittendly.
+  string sync = 200;
+}
+
+message UpdateI_Object_Update {}
+
+// UpdateO is the output for synchronizing subscriptions.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "stts": "started"
+//                 },
+//                 "symbol": {
+//                     "pntr": "1689001255"
+//                 }
+//             }
+//         ]
+//     }
+//
+message UpdateO {
+  UpdateO_Filter filter = 100;
+  repeated UpdateO_Object object = 200;
+}
+
+message UpdateO_Filter {}
+
+message UpdateO_Object {
+  UpdateO_Object_Intern intern = 100;
+  UpdateO_Object_Public public = 200;
+  UpdateO_Object_Symbol symbol = 300;
+}
+
+message UpdateO_Object_Intern {
+  // stts is the resource status upon successful subscription synchronization.
+  //
+  //     started for the first call when a new update lifecycle was initiated
+  //     waiting for consecutive calls, as long as pointers are equal
+  //     updated for finished lifecycle updates, as soon as pointers differ
+  //
+  string stts = 100;
+}
+
+message UpdateO_Object_Public {}
+
+message UpdateO_Object_Symbol {
+  // pntr is the internally tracked timestamp of the most recent update
+  // lifecycle. The pointer returned here can be provided in a delayed
+  // consecutive call, again with sync set to "default".
+  string pntr = 100;
+}

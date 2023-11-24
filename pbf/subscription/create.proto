@@ -1,0 +1,83 @@
+syntax = "proto3";
+
+package subscription;
+option go_package = "./;subscription";
+
+// CreateI is the input for registering subscriptions. Note that create queries
+// for subscriptions must be authenticated.
+//
+//     {
+//         "object": [
+//             {
+//                 "public": {
+//                     "crtr": "0x2345",
+//                     "sbsc": "0x1234",
+//                     "unix": "1698793200"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateI {
+  CreateI_Filter filter = 100;
+  repeated CreateI_Object object = 200;
+}
+
+message CreateI_Filter {}
+
+message CreateI_Object {
+  CreateI_Object_Intern intern = 100;
+  CreateI_Object_Public public = 200;
+}
+
+message CreateI_Object_Intern {}
+
+message CreateI_Object_Public {
+  // crtr is the wallet address of a content creator designated for the purpose
+  // of accounting. These are the addresses getting paid peer-to-peer by users
+  // subscribing for accessing premium features.
+  string crtr = 100;
+  // sbsc is the wallet address of the user getting access to premium features
+  // upon asynchronous subscription verification.
+  string sbsc = 200;
+  // unix is the timestamp of the subscription period. This timestamp must be
+  // represented in unix seconds, that is in UTC, pointing to the start of any
+  // given month. For instance, 1698793200 is Wed Nov 01 2023 00:00:00 UTC,
+  // which would subscribe for the whole month of November 2023.
+  string unix = 300;
+}
+
+// CreateO is the output for registering subscriptions.
+//
+//     {
+//         "object": [
+//             {
+//                 "intern": {
+//                     "crtd": "1689001255",
+//                     "subs": "98762362635"
+//                 }
+//             }
+//         ]
+//     }
+//
+message CreateO {
+  CreateO_Filter filter = 100;
+  repeated CreateO_Object object = 200;
+}
+
+message CreateO_Filter {}
+
+message CreateO_Object {
+  CreateO_Object_Intern intern = 100;
+  CreateO_Object_Public public = 200;
+}
+
+message CreateO_Object_Intern {
+  // crtd is the unix timestamp in seconds at which the subscription got
+  // registered.
+  string crtd = 100;
+  // subs is the ID of the subscription being registered.
+  string subs = 200;
+}
+
+message CreateO_Object_Public {}
