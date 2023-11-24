@@ -3,7 +3,8 @@ syntax = "proto3";
 package subscription;
 option go_package = "./;subscription";
 
-// UpdateI is the input for updating subscriptions.
+// UpdateI is the input for synchronizing subscription state between onchain and
+// offchain. Note that update queries for subscriptions must be authenticated.
 //
 //     {
 //         "object": [
@@ -50,7 +51,7 @@ message UpdateI_Object_Symbol {
 
 message UpdateI_Object_Update {}
 
-// UpdateO is the output for updating subscriptions.
+// UpdateO is the output for synchronizing subscriptions.
 //
 //     {
 //         "object": [
@@ -79,7 +80,7 @@ message UpdateO_Object {
 }
 
 message UpdateO_Object_Intern {
-  // stts is the resource status upon successful subscription modification.
+  // stts is the resource status upon successful subscription synchronization.
   //
   //     started for the first call when a new update lifecycle was initiated
   //     waiting for consecutive calls, as long as pointers are equal
