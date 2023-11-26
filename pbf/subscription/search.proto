@@ -66,6 +66,7 @@ message SearchI_Object_Public {
 //             {
 //                 "intern": {
 //                     "crtd": "1689001255",
+//                     "stts": "success",
 //                     "subs": "98762362635",
 //                     "user": "551265"
 //                 },
@@ -95,10 +96,24 @@ message SearchO_Object_Intern {
   // crtd is the unix timestamp in seconds at which the subscription got
   // registered.
   string crtd = 100;
+  // fail is the description explaining why a subscription could not be verified
+  // successfully. Most subscriptions should not be accompanied by a failure
+  // message.
+  optional string fail = 200;
+  // stts is the resource status expressing whether this subscription is active.
+  // An active subscription is verified by comparing its offchain and onchain
+  // state. Subscriptions found to be invalid will not be marked as active, but
+  // will instead be accompanied by
+  //
+  //     created for a newly registered subscriptions
+  //     failure for successfully processed subscriptions
+  //     success for processed subscriptions found to be invalid
+  //
+  bool stts = 300;
   // subs is the ID of the subscription being searched.
-  string subs = 200;
+  string subs = 400;
   // user is the ID of the user who registered this subscription.
-  string user = 300;
+  string user = 500;
 }
 
 message SearchO_Object_Public {
