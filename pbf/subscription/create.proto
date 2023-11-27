@@ -11,7 +11,7 @@ option go_package = "./;subscription";
 //             {
 //                 "public": {
 //                     "crtr": "0x2345",
-//                     "sbsc": "0x1234",
+//                     "recv": "0x1234",
 //                     "unix": "1698793200"
 //                 }
 //             }
@@ -37,9 +37,9 @@ message CreateI_Object_Public {
   // of accounting. These are the addresses getting paid peer-to-peer by users
   // subscribing for accessing premium features.
   string crtr = 100;
-  // sbsc is the wallet address of the user getting access to premium features
+  // recv is the wallet address of the user getting access to premium features
   // upon asynchronous subscription verification.
-  string sbsc = 200;
+  string recv = 200;
   // unix is the timestamp of the subscription period. This timestamp must be
   // represented in unix seconds, that is in UTC, pointing to the start of any
   // given month. For instance, 1698793200 is Wed Nov 01 2023 00:00:00 UTC,
