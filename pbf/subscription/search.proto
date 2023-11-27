@@ -109,7 +109,7 @@ message SearchO_Object_Intern {
   //     failure for successfully processed subscriptions
   //     success for processed subscriptions found to be invalid
   //
-  bool stts = 300;
+  string stts = 300;
   // subs is the ID of the subscription being searched.
   string subs = 400;
   // user is the ID of the user who registered this subscription.
