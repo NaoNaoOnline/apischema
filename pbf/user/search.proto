@@ -65,6 +65,7 @@ message SearchI_Object_Symbol {
 //             {
 //                 "intern": {
 //                     "crtd": "1689001255",
+//                     "prem": "1698793200",
 //                     "user": "551265"
 //                 },
 //                 "public": {
@@ -92,8 +93,10 @@ message SearchO_Object {
 message SearchO_Object_Intern {
   // crtd is the unix timestamp in seconds at which the event got created.
   string crtd = 100;
+  // prem is the time until the user got a valid premium subscription, if any.
+  string prem = 200;
   // user is the ID of the user being searched.
-  string user = 200;
+  string user = 300;
 }
 
 message SearchO_Object_Public {

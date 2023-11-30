@@ -99,7 +99,7 @@ message SearchO_Object_Intern {
   // fail is the description explaining why a subscription could not be verified
   // successfully. Most subscriptions should not be accompanied by a failure
   // message.
-  optional string fail = 200;
+  string fail = 200;
   // stts is the resource status expressing whether this subscription is active.
   // An active subscription is verified by comparing its offchain and onchain
   // state. Subscriptions found to be invalid will not be marked as active, but
