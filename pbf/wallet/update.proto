@@ -63,10 +63,10 @@ message UpdateI_Object_Public {
 message UpdateI_Object_Symbol {}
 
 message UpdateI_Object_Update {
-  optional string frm = 100;
+  string frm = 100;
   string ope = 200;
   string pat = 300;
-  optional string val = 400;
+  string val = 400;
 }
 
 // UpdateO is the output for updating wallets.
