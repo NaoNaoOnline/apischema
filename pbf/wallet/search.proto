@@ -41,6 +41,7 @@ message SearchI_Filter_Paging {
 message SearchI_Object {
   SearchI_Object_Intern intern = 100;
   SearchI_Object_Public public = 200;
+  SearchI_Object_Symbol symbol = 300;
 }
 
 message SearchI_Object_Intern {
@@ -54,6 +55,13 @@ message SearchI_Object_Public {
   //     eth for ethereum wallets
   //
   string kind = 100;
+}
+
+message SearchI_Object_Symbol {
+  // crtr set to "default" returns the wallet objects representing the
+  // legitimate content creators that the calling user enjoyed content from, in
+  // the form of an event link click.
+  string crtr = 100;
 }
 
 // SearchO is the output for searching wallets.
