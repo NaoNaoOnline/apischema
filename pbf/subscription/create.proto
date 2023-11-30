@@ -3,15 +3,16 @@ syntax = "proto3";
 package subscription;
 option go_package = "./;subscription";
 
-// CreateI is the input for registering subscriptions. Note that create queries
-// for subscriptions must be authenticated.
+// CreateI is the input for creating subscriptions. Note that create queries for
+// subscriptions must be authenticated.
 //
 //     {
 //         "object": [
 //             {
 //                 "public": {
 //                     "crtr": "0x2345",
-//                     "recv": "0x1234",
+//                     "payr": "551265",
+//                     "rcvr": "551265",
 //                     "unix": "1698793200"
 //                 }
 //             }
@@ -34,20 +35,23 @@ message CreateI_Object_Intern {}
 
 message CreateI_Object_Public {
   // crtr is the wallet address of a content creator designated for the purpose
-  // of accounting. These are the addresses getting paid peer-to-peer by users
-  // subscribing for accessing premium features.
+  // of accounting. These are the creator addresses getting paid peer-to-peer by
+  // users subscribing for accessing premium features.
   string crtr = 100;
-  // recv is the wallet address of the user getting access to premium features
-  // upon asynchronous subscription verification.
-  string recv = 200;
+  // payr is the user ID of the user paying for the premium subscription. This
+  // is usually the same user ID as rcvr, but it does not have to be the same.
+  // The idea here is that subscriptions can be gifted to other users.
+  string payr = 200;
+  // rcvr is the user ID of the user receiving the premium subscription.
+  string rcvr = 300;
   // unix is the timestamp of the subscription period. This timestamp must be
   // represented in unix seconds, that is in UTC, pointing to the start of any
   // given month. For instance, 1698793200 is Wed Nov 01 2023 00:00:00 UTC,
   // which would subscribe for the whole month of November 2023.
-  string unix = 300;
+  string unix = 400;
 }
 
-// CreateO is the output for registering subscriptions.
+// CreateO is the output for creating subscriptions.
 //
 //     {
 //         "object": [
@@ -74,9 +78,9 @@ message CreateO_Object {
 
 message CreateO_Object_Intern {
   // crtd is the unix timestamp in seconds at which the subscription got
-  // registered.
+  // created.
   string crtd = 100;
-  // subs is the ID of the subscription being registered.
+  // subs is the ID of the subscription being created.
   string subs = 200;
 }
 
