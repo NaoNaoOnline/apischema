@@ -7,6 +7,23 @@ languages and remain mostly independent of transport layer specifics.
 
 
 
+### Resource Definitions
+
+* The `List` resource allows users to manage custom event feeds based on a set
+  of associated rules. Static lists can only contain manually added events.
+  Dynamic lists contain automatically added events based on the aggregated
+  criteria of a list's rule set. Criteria for dynamic lists can be events hosted
+  by certain hosts, events categorized by certain categories and events created
+  by certain creators.
+* The `Rule` resource allows users to add events to custom lists based on
+  certain criteria. Criteria like specific event IDs are static. Adding static
+  rules to static lists restricts the lists' ability to only contain static
+  rules. Criteria like category IDs, host IDs and user IDs are dynamic. Adding
+  dynamic rules to dynamic lists restricts the lists' ability to only contain
+  dynamic rules.
+
+
+
 ### Query Objects
 
 All APIs allow for multiple action specific query objects, each of which defines
@@ -143,6 +160,7 @@ system.
 {
     "filter": {
         "paging": {
+            "kind": "page",
             "strt": "0",
             "stop": "49"
         }
@@ -154,21 +172,19 @@ Providing paging pointers in requests containing multiple search query objects
 causes the system to apply paging to each search query result. Consider
 resources to be searched from two lists using two search query objects. Say the
 lists look like [A B C D] and [E F G H]. Searching for both results from both
-lists in a single call using strt=0 and stop=1 would return [A B] and [E F]. If
-paging is desired for large lists of objects, single search query objects may be
-more applicable, depending on the use case.
+lists in a single call using `strt=0` and `stop=1` would return [A B] and [E F].
+If paging is desired for large lists of objects, single search query objects may
+be more applicable, depending on the use case.
 
-Note that the paging pointers may refer to the absolute number of objects
-received, or other indexing parameters, like unix timestamps, depending on the
-API implementation and use case. Searching for objects constrained to a
-particular hour in time may be done by defining strt=1672531200 and
-stop=1672534800. Paging pointers defining absolute numbers may result in less
-received objects than requested, but never more. Paging pointers defining other
-indexing parameters, like unix timestamps, may result in indeterministic amounts
-of received objects.
+There are two kinds of paging pointers, `kind=page` and `kind=unix`. Kind page
+is the default and does not have to be provided. Using kind page may result in
+less received objects than requested, but never more. Using kind unix may result
+in indeterministic amounts of received objects. Searching for objects
+constrained to a particular hour in time may be done by defining `kind=unix`,
+`strt=1672531200` and `stop=1672534800`.
 
 Further note that the hard cap of returned objects is 1000. No more than 1000
-objects can be received from a single call.
+objects can be received from any endpoint in a single call.
 
 
 
