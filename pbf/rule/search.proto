@@ -11,6 +11,7 @@ option go_package = "./;rule";
 //     {
 //         "filter": {
 //             "paging": {
+//                 "kind": "page",
 //                 "strt": "0",
 //                 "stop": "49"
 //             }
@@ -34,8 +35,9 @@ message SearchI_Filter {
 }
 
 message SearchI_Filter_Paging {
-  string strt = 100;
-  string stop = 200;
+  string kind = 100;
+  string strt = 200;
+  string stop = 300;
 }
 
 message SearchI_Object {
@@ -103,7 +105,6 @@ message SearchO_Object_Public {
   //     cate for adding or removing events matching the given category IDs
   //     evnt for adding or removing events matching the given event IDs
   //     host for adding or removing events matching the given host IDs
-  //     like for adding or removing events liked by the given user IDs
   //     user for adding or removing events created by the given user IDs
   //
   string kind = 300;

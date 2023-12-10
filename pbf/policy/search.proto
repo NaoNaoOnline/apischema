@@ -8,6 +8,7 @@ option go_package = "./;policy";
 //     {
 //         "filter": {
 //             "paging": {
+//                 "kind": "page",
 //                 "strt": "0",
 //                 "stop": "49"
 //             }
@@ -15,7 +16,7 @@ option go_package = "./;policy";
 //         "object": [
 //             {
 //                 "symbol": {
-//                     "ltst": "default"
+//                     "ltst": "dflt"
 //                 }
 //             }
 //         ]
@@ -36,8 +37,9 @@ message SearchI_Filter {
 }
 
 message SearchI_Filter_Paging {
-  string strt = 100;
-  string stop = 200;
+  string kind = 100;
+  string strt = 200;
+  string stop = 300;
 }
 
 message SearchI_Object {
@@ -51,10 +53,10 @@ message SearchI_Object_Intern {}
 message SearchI_Object_Public {}
 
 message SearchI_Object_Symbol {
-  // ltst set to "default" returns the latest aggregated version of cached
-  // policy records indexed from all onchain smart contracts configured. That
-  // is, the list of aggregated records representing the currently active
-  // authorization states.
+  // ltst set to "dflt" returns the latest aggregated version of cached policy
+  // records indexed from all onchain smart contracts configured. That is, the
+  // list of aggregated records representing the currently active authorization
+  // states.
   //
   // Note that indexing happens periodically in a background process, which can
   // be triggered by policy members to update the cached state on demand using
