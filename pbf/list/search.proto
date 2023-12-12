@@ -61,11 +61,15 @@ message SearchI_Object_Public {}
 //             {
 //                 "intern": {
 //                     "crtd": "1689001255",
+//                     "feed": {
+//                         "time": "1695326765"
+//                     },
 //                     "list": "986763351",
 //                     "user": "551265"
 //                 },
 //                 "public": {
-//                     "desc": "where CT personalities meet"
+//                     "desc": "where CT personalities meet",
+//                     "feed": "1695326765"
 //                 }
 //             },
 //             ...
@@ -87,13 +91,27 @@ message SearchO_Object {
 message SearchO_Object_Intern {
   // crtd is the unix timestamp in seconds at which the list got created.
   string crtd = 100;
+  // feed contains lifecycle metadata for this list object.
+  SearchO_Object_Intern_Feed feed = 200;
   // list is the ID of the list being searched.
-  string list = 200;
+  string list = 300;
   // user is the ID of the user who created this list.
-  string user = 300;
+  string user = 400;
+}
+
+message SearchO_Object_Intern_Feed {
+  // Time is the unix timestamp in seconds of the most recent time at which this
+  // list's notification timestamp got updated.
+  string time = 100;
 }
 
 message SearchO_Object_Public {
   // desc is the list's description.
   string desc = 100;
+  // feed is the unix timestamp in seconds at which the user consumed this list
+  // most recently. The delta between feed and the current time can be used to
+  // fetch the delta of event objects that the user has not seen yet in this
+  // list. This way clients display notifications for users in a pull based
+  // system.
+  string feed = 200;
 }
