@@ -79,8 +79,8 @@ message SearchI_Object_Symbol {
   // read max.
   string like = 200;
   // list set to any valid list ID returns all of the event objects matching the
-  // provided list's criteria. Paging is available by providing absolute numbers
-  // as pointers for the underyling ordered objects.
+  // provided list's criteria. Paging is available for paging kind page and
+  // unix.
   string list = 100;
   // time set to a valid symbol or a unix time range returns the list of events
   // known to happen within the specified boundaries. Note that the default
@@ -163,8 +163,11 @@ message SearchO_Object_Intern {
   string crtd = 100;
   // evnt is the ID of the event being searched.
   string evnt = 200;
+  // list is the ID of the list this event belongs to, if any. Note that this
+  // field will only be set when searching events using symbol.list.
+  string list = 300;
   // user is the ID of the user who created this event.
-  string user = 300;
+  string user = 400;
 }
 
 message SearchO_Object_Public {
