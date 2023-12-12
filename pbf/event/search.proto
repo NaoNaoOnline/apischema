@@ -77,11 +77,11 @@ message SearchI_Object_Symbol {
   // the absolute lower boundary of the requested page, read min. The second
   // paging pointer here is the absolute upper boundary of the requested page,
   // read max.
-  string like = 200;
+  string like = 100;
   // list set to any valid list ID returns all of the event objects matching the
   // provided list's criteria. Paging is available for paging kind page and
   // unix.
-  string list = 100;
+  string list = 200;
   // time set to a valid symbol or a unix time range returns the list of events
   // known to happen within the specified boundaries. Note that the default
   // event retention for past events is one week. The premium subscriber event
