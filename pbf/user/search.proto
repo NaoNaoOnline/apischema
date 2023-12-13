@@ -73,7 +73,11 @@ message SearchI_Object_Symbol {
 //                 "public": {
 //                     "home": "986763351",
 //                     "imag": "https://gravatar.com/9050f8ea",
-//                     "name": "xh3b4sd"
+//                     "name": "xh3b4sd",
+//                     "prfl": {
+//                         "Twitter": "xh3b4sd",
+//                         "Warpcast": "xh3b4sd"
+//                     }
 //                 }
 //             },
 //             ...
@@ -111,4 +115,7 @@ message SearchO_Object_Public {
   string imag = 200;
   // name is the user name.
   string name = 300;
+  // prfl is the map of external accounts related to this user. These accounts
+  // may point to references about this user on other platforms.
+  map<string, string> prfl = 400;
 }
